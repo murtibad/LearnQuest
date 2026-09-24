@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LearnQuest.Web.Controllers
 {
@@ -10,3 +10,4 @@ namespace LearnQuest.Web.Controllers
         }
     }
 }
+

@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - LearnQuest</title>
+    <script src="~/js/site.js" asp-append-version="true"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -15,31 +16,36 @@
         
         /* Dynamic Sidebar via CSS Variables */
         .sidebar { 
-            width: 250px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); 
+            width: 260px; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); 
             display: flex; flex-direction: column; padding: 24px; position: fixed; height: 100vh; 
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .sidebar-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; text-decoration: none; color: var(--text-main); font-size: 1.25rem; font-weight: 700; transition: color 0.3s ease;}
         .sidebar-logo img { width: 40px; height: 40px; border-radius: 50%; }
         
-        .nav-item { margin-bottom: 8px; }
+        .nav-item { margin-bottom: 4px; }
         .nav-link { color: var(--text-muted); text-decoration: none; padding: 12px 16px; border-radius: 12px; display: flex; align-items: center; gap: 12px; font-weight: 500; transition: all 0.3s; }
-        .nav-link:hover, .nav-link.active { background-color: var(--hover-bg); color: var(--hover-text); }
+        .nav-link:hover { background-color: var(--hover-bg); color: var(--hover-text); }
+        .nav-link.active { background-color: var(--hover-bg); color: var(--hover-text); font-weight: 600; }
         
-        .main-content { flex-grow: 1; margin-left: 250px; padding-bottom: 2rem; }
+        .main-content { flex-grow: 1; margin-left: 260px; padding-bottom: 2rem; }
         
         /* Theme Toggle Button */
         .theme-btn {
             background: transparent; border: 1px solid var(--border-color);
             border-radius: 12px; padding: 10px; width: 100%; text-align: left;
             display: flex; align-items: center; justify-content: center; gap: 10px;
-            color: var(--text-main); transition: all 0.3s ease;
+            color: var(--text-main); transition: all 0.3s ease; cursor: pointer;
         }
-        .theme-btn:hover { background-color: var(--border-color); }
+        .theme-btn:hover { background-color: var(--hover-bg); }
     </style>
 </head>
-<script src="~/js/site.js" asp-append-version="true"></script>
 <body>
+    @{
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+        var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+    }
+
     <div class="app-container">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -50,21 +56,39 @@
             
             <nav class="flex-column flex-grow-1">
                 <div class="nav-item">
-                    <a href="/Dashboard" class="nav-link active"><i class="bi bi-house-door-fill"></i> Ana Sayfa</a>
+                    <a href="/Dashboard" class="nav-link @(currentController == "Dashboard" && currentAction == "Index" ? "active" : "")">
+                        <i class="bi bi-house-door-fill"></i> Ana Sayfa
+                    </a>
                 </div>
                 <div class="nav-item">
-                    <a href="#" class="nav-link"><i class="bi bi-book-half"></i> Dersler</a>
+                    <a href="/Courses" class="nav-link @(currentController == "Courses" ? "active" : "")">
+                        <i class="bi bi-book-half"></i> Dersler
+                    </a>
                 </div>
                 <div class="nav-item">
-                    <a href="#" class="nav-link"><i class="bi bi-controller"></i> Oyunlar</a>
+                    <a href="/Dashboard/Quiz" class="nav-link @(currentController == "Dashboard" && currentAction == "Quiz" ? "active" : "")">
+                        <i class="bi bi-controller"></i> Oyunlar
+                    </a>
                 </div>
                 <div class="nav-item">
-                    <a href="#" class="nav-link"><i class="bi bi-card-checklist"></i> Sınavlar</a>
+                    <a href="/Dashboard/Quiz" class="nav-link @(currentController == "Quiz" ? "active" : "")">
+                        <i class="bi bi-card-checklist"></i> Sınavlar
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/Dashboard/Statistics" class="nav-link @(currentAction == "Statistics" ? "active" : "")">
+                        <i class="bi bi-bar-chart-line-fill"></i> İstatistikler
+                    </a>
+                </div>
+                <div class="nav-item">
+                    <a href="/Dashboard/Profile" class="nav-link @(currentAction == "Profile" ? "active" : "")">
+                        <i class="bi bi-person-fill"></i> Profil
+                    </a>
                 </div>
             </nav>
 
             <div class="mt-auto d-flex flex-column gap-3">
-                <!-- Theme Switcher Action -->
+                <!-- Theme Switcher -->
                 <button id="themeToggle" class="theme-btn">
                     <i id="themeIcon" class="bi bi-moon-stars-fill fs-5"></i>
                     <span class="fw-medium small">Tema Değiştir</span>
@@ -84,4 +108,5 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+</html>
 </html>

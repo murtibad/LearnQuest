@@ -1,35 +1,284 @@
+/* ============================================
+   LearnQuest - Global Design System
+   ============================================ */
+
 /* Default Light Mode Variables */
 :root {
     --bg-main: #f4f7fe;
     --text-main: #0f172a;
     --text-muted: #64748b;
     --card-bg: #ffffff;
-    --border-color: rgba(0, 0, 0, 0.05);
+    --border-color: rgba(0, 0, 0, 0.08);
     --sidebar-bg: #ffffff;
     --hover-bg: rgba(79, 70, 229, 0.1);
     --hover-text: #4F46E5;
+    --input-bg: #f1f5f9;
+    --purple-badge: #8b5cf6;
+    --primary: #4F46E5;
+    --primary-hover: #4338ca;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
 }
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
     --bg-main: #0b1120;
     --text-main: #f8fafc;
-    --text-muted: #cbd5e1;
+    --text-muted: #94a3b8;
     --card-bg: #1e293b;
-    --border-color: rgba(255, 255, 255, 0.05);
+    --border-color: rgba(255, 255, 255, 0.08);
     --sidebar-bg: #0f172a;
     --hover-bg: rgba(79, 70, 229, 0.2);
     --hover-text: #818cf8;
+    --input-bg: #1e293b;
+    --purple-badge: #a78bfa;
+    --primary: #6366f1;
+    --primary-hover: #818cf8;
 }
 
-/* Global Theme Transitions */
+/* ============================================
+   Global Base Styles
+   ============================================ */
+
 body {
     background-color: var(--bg-main) !important;
     color: var(--text-main) !important;
+    font-family: 'Inter', sans-serif;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+a {
+    transition: color 0.3s ease;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
 
 .text-muted-custom {
     color: var(--text-muted) !important;
     transition: color 0.3s ease;
 }
+
+/* ============================================
+   Bento Card Component
+   ============================================ */
+
+.bento-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.bento-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] .bento-card:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================
+   Form Controls (Theme-Aware)
+   ============================================ */
+
+.form-control,
+.form-select {
+    background-color: var(--input-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-main) !important;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: var(--input-bg) !important;
+    border-color: var(--primary) !important;
+    color: var(--text-main) !important;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+}
+
+.form-control::placeholder {
+    color: var(--text-muted) !important;
+}
+
+.input-group-text {
+    background-color: var(--input-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-muted) !important;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* ============================================
+   Progress Bar Theme Support
+   ============================================ */
+
+.progress {
+    background-color: var(--border-color) !important;
+}
+
+/* ============================================
+   Table Theme Support
+   ============================================ */
+
+.table {
+    color: var(--text-main) !important;
+}
+
+/* ============================================
+   Badge Variants
+   ============================================ */
+
+.badge-category {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+/* ============================================
+   Activity Item Component
+   ============================================ */
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.activity-item:last-child {
+    border-bottom: none;
+}
+
+.activity-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 1.1rem;
+}
+
+/* ============================================
+   Badge/Rozet Component
+   ============================================ */
+
+.badge-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.badge-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.badge-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px auto;
+    font-size: 1.5rem;
+}
+
+/* ============================================
+   Stat Bar (for Profile/Statistics)
+   ============================================ */
+
+.stat-bar {
+    background-color: var(--border-color);
+    border-radius: 6px;
+    overflow: hidden;
+    height: 100%;
+    min-height: 120px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.stat-bar-fill {
+    background: linear-gradient(180deg, #6366f1, #4F46E5);
+    border-radius: 6px;
+    width: 100%;
+    transition: height 0.5s ease;
+}
+
+/* ============================================
+   Tab Component
+   ============================================ */
+
+.tab-custom {
+    display: inline-block;
+    padding: 10px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    color: var(--text-muted);
+    background-color: transparent;
+    border: none;
+}
+
+.tab-custom:hover {
+    color: var(--text-main);
+    background-color: var(--hover-bg);
+}
+
+.tab-custom.active {
+    color: white;
+    background-color: var(--primary);
+}
+
+/* ============================================
+   Responsive Utilities
+   ============================================ */
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+    }
+}
+

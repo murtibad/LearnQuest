@@ -1,4 +1,4 @@
-﻿@{
+@{
     Layout = "_Layout";
     ViewData["Title"] = "Dashboard";
 }
@@ -6,123 +6,132 @@
 <div class="container-fluid py-4">
     
     <!-- Welcome Header -->
-    <div class="d-flex justify-content-between align-items-center mb-5">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-5">
         <div>
             <h2 class="fw-bold mb-1 d-flex align-items-center gap-2" style="color: var(--text-main);">
-                Merhaba, Öğrenci! 
+                Merhaba, Tayfun! 
                 <span style="font-size: 1.5rem;">👋</span>
             </h2>
-            <p class="text-muted-custom">Bugünün hedefi: 2 ders tamamla ve 1 sınav yap!</p>
+            <p class="text-muted-custom mb-0">Bugünün hedefi: 2 ders tamamla ve 1 sınav yap!</p>
         </div>
         <div class="d-flex align-items-center gap-3">
-            <button class="btn btn-link text-decoration-none position-relative p-2 text-muted-custom">
+            <button class="btn btn-link text-decoration-none position-relative p-2 text-muted-custom" aria-label="Bildirimler">
                 <i class="bi bi-bell fs-5"></i>
                 <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
             </button>
             <div class="d-flex align-items-center gap-2 rounded-pill p-1 pe-3" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
-                <div class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px; font-weight: bold;">
-                    Ö
+                <div class="text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 36px; height: 36px; background-color: var(--primary); font-weight: 700; font-size: 0.85rem;">
+                    TS
                 </div>
                 <div class="d-flex flex-column lh-1">
-                    <span class="fw-bold small" style="color: var(--text-main);">Öğrenci</span>
-                    <span class="text-primary" style="font-size: 0.7rem;">Seviye 5</span>
+                    <span class="fw-bold small" style="color: var(--text-main);">Tayfun Soy</span>
+                    <span class="mt-1" style="color: var(--primary); font-size: 0.72rem; font-weight: 600;">Seviye 5</span>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Statistics Cards -->
-    <div class="row g-4 mb-5">
-        <div class="col-md-3">
-            <div class="card h-100 shadow-sm" style="border-radius: 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
-                <div class="card-body d-flex align-items-center gap-3 p-4">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 60px; height: 60px; background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
-                        <i class="bi bi-book-half fs-3"></i>
-                    </div>
-                    <div>
-                        <p class="mb-0 small fw-medium text-muted-custom">Toplam Ders</p>
-                        <h3 class="fw-bold mb-0" style="color: var(--text-main); transition: color 0.3s ease;">12</h3>
-                    </div>
+    <div class="row g-4 mb-4">
+        <!-- Toplam Ders -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="bento-card h-100 d-flex align-items-center gap-3">
+                <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 56px; height: 56px; background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                    <i class="bi bi-book-half fs-3"></i>
+                </div>
+                <div>
+                    <p class="mb-0 small fw-medium text-muted-custom">Toplam Ders</p>
+                    <h3 class="fw-bold mb-0" style="color: var(--text-main);">12</h3>
                 </div>
             </div>
         </div>
         
-        <div class="col-md-3">
-            <div class="card h-100 shadow-sm" style="border-radius: 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
-                <div class="card-body d-flex align-items-center gap-3 p-4">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 60px; height: 60px; background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
-                        <i class="bi bi-check-circle fs-3"></i>
-                    </div>
-                    <div>
-                        <p class="mb-0 small fw-medium text-muted-custom">Tamamlanan</p>
-                        <h3 class="fw-bold mb-0" style="color: var(--text-main); transition: color 0.3s ease;">8</h3>
-                    </div>
+        <!-- Tamamlanan Ders -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="bento-card h-100 d-flex align-items-center gap-3">
+                <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 56px; height: 56px; background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
+                    <i class="bi bi-check-circle-fill fs-3"></i>
+                </div>
+                <div>
+                    <p class="mb-0 small fw-medium text-muted-custom">Tamamlanan Ders</p>
+                    <h3 class="fw-bold mb-0" style="color: var(--text-main);">8</h3>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card h-100 shadow-sm" style="border-radius: 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
-                <div class="card-body d-flex align-items-center gap-3 p-4">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 60px; height: 60px; background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
-                        <i class="bi bi-star-fill fs-3"></i>
-                    </div>
-                    <div>
-                        <p class="mb-0 small fw-medium text-muted-custom">Başarı Oranı</p>
-                        <h3 class="fw-bold mb-0" style="color: var(--text-main); transition: color 0.3s ease;">%85</h3>
-                    </div>
+        <!-- Başarı Oranı -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="bento-card h-100 d-flex align-items-center gap-3">
+                <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 56px; height: 56px; background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
+                    <i class="bi bi-star-fill fs-3"></i>
+                </div>
+                <div>
+                    <p class="mb-0 small fw-medium text-muted-custom">Başarı Oranı</p>
+                    <h3 class="fw-bold mb-0" style="color: var(--text-main);">%85</h3>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-3">
-            <div class="card h-100 shadow-sm" style="border-radius: 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
-                <div class="card-body d-flex align-items-center gap-3 p-4">
-                    <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 60px; height: 60px; background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
-                        <i class="bi bi-trophy-fill fs-3"></i>
-                    </div>
-                    <div>
-                        <p class="mb-0 small fw-medium text-muted-custom">Toplam Puan</p>
-                        <h3 class="fw-bold mb-0" style="color: var(--text-main); transition: color 0.3s ease;">4.320</h3>
-                    </div>
+        <!-- Toplam Puan -->
+        <div class="col-sm-6 col-xl-3">
+            <div class="bento-card h-100 d-flex align-items-center gap-3">
+                <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 56px; height: 56px; background-color: rgba(139, 92, 246, 0.1); color: var(--purple-badge);">
+                    <i class="bi bi-trophy-fill fs-3"></i>
+                </div>
+                <div>
+                    <p class="mb-0 small fw-medium text-muted-custom">Toplam Puan</p>
+                    <h3 class="fw-bold mb-0" style="color: var(--text-main);">4.320</h3>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Progress and Tasks -->
-    <div class="row g-4">
+    <!-- Progress and Quests (Two Columns) -->
+    <div class="row g-4 mb-4">
         <!-- Level Progress -->
         <div class="col-lg-7">
-            <div class="card shadow-sm h-100" style="border-radius: 24px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
-                <div class="card-body p-4 p-lg-5">
+            <div class="bento-card h-100 p-4 p-lg-5 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0" style="color: var(--text-main);">Seviye İlerlemesi</h5>
+                        <span class="badge rounded-pill px-3 py-1 fw-semibold" style="background-color: var(--hover-bg); color: var(--primary); font-size: 0.8rem;">
+                            XP Durumu
+                        </span>
+                    </div>
+
                     <div class="d-flex justify-content-between align-items-end mb-4">
                         <div class="d-flex align-items-center gap-4">
-                            <div class="position-relative">
-                                <i class="bi bi-shield-fill text-primary" style="font-size: 5rem;"></i>
+                            <div class="position-relative d-inline-flex align-items-center justify-content-center">
+                                <i class="bi bi-shield-fill" style="font-size: 4.75rem; color: var(--primary); line-height: 1;"></i>
                                 <span class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-4">5</span>
                             </div>
                             <div>
-                                <h4 class="fw-bold mb-1" style="color: var(--text-main); transition: color 0.3s ease;">Seviye 5</h4>
-                                <p class="mb-0 text-muted-custom">320 / 600 XP</p>
+                                <h4 class="fw-bold mb-1" style="color: var(--text-main);">Seviye 5</h4>
+                                <p class="mb-0 text-muted-custom fw-medium">320 / 600 XP</p>
                             </div>
                         </div>
-                        <span class="fw-medium text-muted-custom">Seviye 6</span>
+                        <span class="fw-semibold text-muted-custom">Seviye 6</span>
                     </div>
-                    
-                    <div class="progress" style="height: 12px; border-radius: 10px; background-color: var(--border-color);">
-                        <div class="progress-bar rounded-pill" role="progressbar" style="width: 53%; background-color: #4F46E5;" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                
+                <div>
+                    <div class="progress" style="height: 12px; border-radius: 10px;">
+                        <div class="progress-bar rounded-pill" role="progressbar" style="width: 53%; background-color: var(--primary);" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="d-flex justify-content-between text-muted-custom small mt-2">
+                        <span>%53 Tamamlandı</span>
+                        <span>280 XP kaldı</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Daily Quest (Always vibrant) -->
+        <!-- Daily Quest (Bugünün Görevi) -->
         <div class="col-lg-5">
-            <div class="card border-0 shadow-sm h-100 text-white" style="border-radius: 24px; background: linear-gradient(135deg, #4F46E5 0%, #3b82f6 100%);">
-                <div class="card-body p-4 p-lg-5 d-flex flex-column justify-content-center">
-                    <div class="d-flex align-items-center gap-3 mb-4">
-                        <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+            <div class="bento-card border-0 text-white h-100 p-4 p-lg-5 d-flex flex-column justify-content-between" style="background: linear-gradient(135deg, #4F46E5 0%, #3b82f6 100%);">
+                <div>
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="bg-white bg-opacity-25 rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 52px; height: 52px;">
                             <i class="bi bi-bullseye fs-3 text-white"></i>
                         </div>
                         <div>
@@ -130,9 +139,78 @@
                             <p class="mb-0 text-white text-opacity-75 small">3 soruluk mini sınavı tamamla.</p>
                         </div>
                     </div>
-                    <a href="/Dashboard/Quiz" class="btn btn-light rounded-pill w-100 py-3 fw-bold text-primary shadow-sm text-decoration-none text-center">Başla</a>
+                    <p class="text-white text-opacity-80 small mb-4">
+                        Günün görevini başarıyla bitirerek ekstra deneyim puanı topla ve sıralamada öne geç!
+                    </p>
+                </div>
+                <a href="/Dashboard/Quiz" class="btn btn-light rounded-pill w-100 py-3 fw-bold shadow-sm text-decoration-none text-center" style="color: #4F46E5;">Başla</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Son Aktiviteler (Recent Activities) -->
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="bento-card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0" style="color: var(--text-main);">Son Aktiviteler</h5>
+                    <span class="badge rounded-pill px-3 py-1 fw-semibold" style="background-color: var(--hover-bg); color: var(--primary); font-size: 0.75rem;">
+                        Son Hareketler
+                    </span>
+                </div>
+
+                <div class="activity-list">
+                    <!-- Activity 1: Green checkmark -->
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background-color: rgba(16, 185, 129, 0.12); color: #10b981;">
+                            <i class="bi bi-check-circle-fill"></i>
+                        </div>
+                        <div class="flex-grow-1 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <span class="fw-semibold" style="color: var(--text-main);">Web Geliştirme dersini tamamladın</span>
+                                <span class="badge rounded-pill fw-semibold px-2 py-1" style="background-color: rgba(16, 185, 129, 0.15); color: #10b981; font-size: 0.75rem;">+100 XP</span>
+                            </div>
+                            <span class="text-muted-custom small">2 saat önce</span>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2: Blue lightning -->
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background-color: rgba(59, 130, 246, 0.12); color: #3b82f6;">
+                            <i class="bi bi-lightning-charge-fill"></i>
+                        </div>
+                        <div class="flex-grow-1 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <span class="fw-semibold" style="color: var(--text-main);">Doğru cevap: JavaScript nedir?</span>
+                                <span class="badge rounded-pill fw-semibold px-2 py-1" style="background-color: rgba(59, 130, 246, 0.15); color: #3b82f6; font-size: 0.75rem;">+50 XP</span>
+                            </div>
+                            <span class="text-muted-custom small">4 saat önce</span>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3: Purple trophy -->
+                    <div class="activity-item">
+                        <div class="activity-icon" style="background-color: rgba(139, 92, 246, 0.12); color: var(--purple-badge);">
+                            <i class="bi bi-trophy-fill"></i>
+                        </div>
+                        <div class="flex-grow-1 d-flex flex-wrap justify-content-between align-items-center gap-2">
+                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                                <span class="fw-semibold" style="color: var(--text-main);">Yeni bir rozet kazandın: "Başlangıç"</span>
+                            </div>
+                            <span class="text-muted-custom small">1 gün önce</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tümünü Gör link -->
+                <div class="text-center pt-3 mt-1">
+                    <a href="#" class="text-decoration-none fw-semibold small d-inline-flex align-items-center gap-1" style="color: var(--primary);">
+                        <span>Tümünü Gör</span>
+                        <i class="bi bi-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
 </div>

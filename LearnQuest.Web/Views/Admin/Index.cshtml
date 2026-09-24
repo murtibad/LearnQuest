@@ -1,6 +1,5 @@
 ﻿@{
     ViewData["Title"] = "Admin Panel";
-    // We don't want the student sidebar here, so we use a custom admin layout structure within this file for now
     Layout = null;
 }
 
@@ -11,21 +10,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard - LearnQuest</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
-        body { background-color: var(--bg-light); font-family: 'Inter', sans-serif; }
-        .admin-sidebar { width: 250px; height: 100vh; position: fixed; background-color: white; border-right: 1px solid #e5e7eb; padding: 24px; }
-        .admin-content { margin-left: 250px; padding: 32px; }
-        .admin-nav-link { color: var(--text-main); text-decoration: none; padding: 10px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; font-weight: 500; margin-bottom: 8px; }
-        .admin-nav-link:hover, .admin-nav-link.active { background-color: var(--primary-blue); color: white; }
+        body { background-color: #0b1120; color: #ffffff; font-family: 'Inter', sans-serif; }
         
-        /* Table Styles for Bento Box feel */
-        .table-bento { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
-        .table-bento th { background-color: #f8fafc; color: var(--text-muted); font-weight: 600; padding: 16px; border-bottom: 2px solid #e5e7eb; }
-        .table-bento td { padding: 16px; vertical-align: middle; border-bottom: 1px solid #f3f4f6; }
+        /* Dark Sidebar */
+        .admin-sidebar { 
+            width: 250px; height: 100vh; position: fixed; 
+            background-color: #0f172a; border-right: 1px solid rgba(255,255,255,0.05); 
+            padding: 24px; 
+        }
+        .admin-content { margin-left: 250px; padding: 32px; }
+        
+        /* Navigation Links */
+        .admin-nav-link { 
+            color: #cbd5e1; text-decoration: none; padding: 10px 16px; 
+            border-radius: 8px; display: flex; align-items: center; gap: 12px; 
+            font-weight: 500; margin-bottom: 8px; transition: all 0.3s;
+        }
+        .admin-nav-link:hover, .admin-nav-link.active { 
+            background-color: #4F46E5; color: white; 
+        }
+        
+        /* Dark Bento Table */
+        .table-bento { 
+            background: #1e293b; border-radius: 16px; overflow: hidden; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2); 
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .table-bento th { 
+            background-color: #0f172a; color: #cbd5e1; font-weight: 600; 
+            padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); 
+        }
+        .table-bento td { 
+            padding: 16px; vertical-align: middle; 
+            border-bottom: 1px solid rgba(255,255,255,0.05); color: #f8fafc;
+        }
+        
+        .badge-subtle-primary { background-color: rgba(79, 70, 229, 0.1); color: #818cf8; border: 1px solid rgba(79, 70, 229, 0.2); }
+        .badge-subtle-success { background-color: rgba(16, 185, 129, 0.1); color: #34d399; }
+        
+        .btn-icon { background: transparent; border: none; color: #94a3b8; transition: color 0.3s; }
+        .btn-icon:hover { color: #ffffff; }
+        .btn-icon-danger:hover { color: #f87171; }
     </style>
 </head>
 <body>
@@ -33,8 +62,8 @@
     <!-- Admin Sidebar -->
     <aside class="admin-sidebar">
         <div class="d-flex align-items-center gap-2 mb-5">
-            <i class="bi bi-shield-lock-fill fs-3 text-primary"></i>
-            <span class="fs-5 fw-bold text-dark">Admin Panel</span>
+            <i class="bi bi-shield-lock-fill fs-3" style="color: #4F46E5;"></i>
+            <span class="fs-5 fw-bold text-white">Admin Panel</span>
         </div>
         
         <nav class="flex-column">
@@ -43,7 +72,7 @@
             <a href="#" class="admin-nav-link"><i class="bi bi-people-fill"></i> Kullanıcılar</a>
             <a href="#" class="admin-nav-link"><i class="bi bi-gear-fill"></i> Ayarlar</a>
             
-            <hr class="my-4" />
+            <hr class="my-4 border-secondary border-opacity-25" />
             <a href="/Dashboard" class="admin-nav-link text-muted"><i class="bi bi-box-arrow-left"></i> Öğrenci Ekranına Dön</a>
         </nav>
     </aside>
@@ -53,16 +82,16 @@
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div>
                 <h2 class="fw-bold mb-1">Ders Yönetimi</h2>
-                <p class="text-muted">Platformdaki tüm dersleri buradan ekleyebilir veya silebilirsin.</p>
+                <p style="color: #cbd5e1;">Platformdaki tüm dersleri buradan ekleyebilir veya silebilirsin.</p>
             </div>
-            <button class="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm">
+            <button class="btn text-white rounded-pill px-4 py-2 fw-bold shadow-sm" style="background-color: #4F46E5;">
                 <i class="bi bi-plus-lg me-2"></i> Yeni Ders Ekle
             </button>
         </div>
 
-        <!-- Course Management Table (Bento Style) -->
+        <!-- Course Management Table -->
         <div class="table-bento">
-            <table class="table table-borderless mb-0">
+            <table class="table table-borderless table-dark bg-transparent mb-0">
                 <thead>
                     <tr>
                         <th>Ders Adı</th>
@@ -73,36 +102,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Row 1 -->
                     <tr>
                         <td>
                             <div class="d-flex align-items-center gap-3">
-                                <div class="bg-primary bg-opacity-10 p-2 rounded text-primary"><i class="bi bi-code-slash fs-5"></i></div>
+                                <div class="badge-subtle-primary p-2 rounded"><i class="bi bi-code-slash fs-5"></i></div>
                                 <span class="fw-bold">C# Temelleri</span>
                             </div>
                         </td>
-                        <td><span class="badge bg-light text-dark border">Programlama</span></td>
+                        <td><span class="badge badge-subtle-primary">Programlama</span></td>
                         <td>124 Öğrenci</td>
-                        <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2">Aktif</span></td>
+                        <td><span class="badge badge-subtle-success rounded-pill px-3 py-2">Aktif</span></td>
                         <td class="text-end">
-                            <button class="btn btn-sm btn-light text-primary me-2"><i class="bi bi-pencil-fill"></i></button>
-                            <button class="btn btn-sm btn-light text-danger"><i class="bi bi-trash-fill"></i></button>
+                            <button class="btn-icon me-2"><i class="bi bi-pencil-fill"></i></button>
+                            <button class="btn-icon btn-icon-danger"><i class="bi bi-trash-fill"></i></button>
                         </td>
                     </tr>
-                    <!-- Row 2 -->
                     <tr>
                         <td>
                             <div class="d-flex align-items-center gap-3">
-                                <div class="bg-success bg-opacity-10 p-2 rounded text-success"><i class="bi bi-database fs-5"></i></div>
+                                <div class="badge-subtle-primary p-2 rounded" style="color: #34d399; background: rgba(16, 185, 129, 0.1);"><i class="bi bi-database fs-5"></i></div>
                                 <span class="fw-bold">SQL Veritabanı</span>
                             </div>
                         </td>
-                        <td><span class="badge bg-light text-dark border">Veritabanı</span></td>
+                        <td><span class="badge badge-subtle-primary">Veritabanı</span></td>
                         <td>89 Öğrenci</td>
-                        <td><span class="badge bg-success bg-opacity-10 text-success rounded-pill px-3 py-2">Aktif</span></td>
+                        <td><span class="badge badge-subtle-success rounded-pill px-3 py-2">Aktif</span></td>
                         <td class="text-end">
-                            <button class="btn btn-sm btn-light text-primary me-2"><i class="bi bi-pencil-fill"></i></button>
-                            <button class="btn btn-sm btn-light text-danger"><i class="bi bi-trash-fill"></i></button>
+                            <button class="btn-icon me-2"><i class="bi bi-pencil-fill"></i></button>
+                            <button class="btn-icon btn-icon-danger"><i class="bi bi-trash-fill"></i></button>
                         </td>
                     </tr>
                 </tbody>

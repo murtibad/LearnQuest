@@ -1,5 +1,5 @@
 ﻿@{
-    Layout = null; 
+    Layout = null;
 }
 
 <!DOCTYPE html>
@@ -7,15 +7,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LearnQuest</title>
-    
-    <!-- Favicon Configuration -->
+    <title>LearnQuest - Level Up Your Skills</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🎮</text></svg>">
     
-    <!-- External Dependencies & Fonts -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <style>
@@ -24,90 +20,92 @@
             background-color: #0b1120;
             color: white;
             font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
             overflow-x: hidden;
         }
         
-        /* Navbar Styles */
+        /* Navbar */
+        .navbar { padding: 1.5rem 5%; background-color: rgba(11, 17, 32, 0.95); backdrop-filter: blur(10px); }
         .navbar-brand { font-weight: 700; font-size: 1.5rem; color: white !important; }
+        .nav-link { color: rgba(255,255,255,0.8) !important; font-weight: 500; transition: color 0.3s; }
+        .nav-link:hover { color: white !important; }
         
-        /* Hero Section Layout */
-        .hero-section { flex-grow: 1; display: flex; align-items: center; padding: 4rem 5%; }
+        /* Typography Fixes for Dark Mode */
+        /* Daha açık, okunabilir bir gri tonu kullanıyoruz */
+        .text-readable-muted { color: #cbd5e1 !important; line-height: 1.6; }
+        
+        /* Hero Section */
+        .hero-section { min-height: 85vh; display: flex; align-items: center; padding: 4rem 5%; position: relative; }
         .hero-title { font-size: 4rem; font-weight: 700; margin-bottom: 1.5rem; line-height: 1.2; }
-        .hero-subtitle { font-size: 1.25rem; color: #A3AED0; margin-bottom: 2.5rem; }
+        .hero-subtitle { font-size: 1.25rem; margin-bottom: 2.5rem; }
         
-        /* Primary Button (Login) */
+        /* Buttons */
         .btn-primary-custom {
-            background-color: var(--primary-blue); color: white; border-radius: 50px;
+            background-color: #4F46E5; color: white; border-radius: 50px;
             padding: 12px 32px; font-weight: 600; border: none; width: 200px;
             transition: all 0.3s ease; display: inline-block;
         }
-        .btn-primary-custom:hover {
-            background-color: #4338ca; color: white; transform: translateY(-2px);
-        }
+        .btn-primary-custom:hover { background-color: #4338ca; color: white; transform: translateY(-2px); }
         
-        /* Outline Button (Register) */
         .btn-outline-custom {
             background-color: transparent; color: white; border: 2px solid white;
             border-radius: 50px; padding: 10px 32px; font-weight: 600; width: 200px;
             transition: all 0.3s ease; display: inline-block;
         }
-        .btn-outline-custom:hover {
-            background-color: white; color: #0b1120; border: 2px solid white; transform: translateY(-2px);
-        }
+        .btn-outline-custom:hover { background-color: white; color: #0b1120; transform: translateY(-2px); }
 
-        /* Ambient Glow Effect */
-        .ambient-glow {
-            position: absolute; width: 100%; height: 100%; background: var(--primary-blue);
-            filter: blur(120px); opacity: 0.2; z-index: 0; top: 0; left: 0;
-        }
+        /* Hero Image */
+        .hero-image-container { position: relative; width: 100%; height: 600px; display: flex; justify-content: center; align-items: center; }
+        .hero-image-container img { width: 100%; height: 100%; object-fit: cover; z-index: 1; border-radius: 24px; }
+        .ambient-glow { position: absolute; width: 100%; height: 100%; background: #4F46E5; filter: blur(100px); opacity: 0.2; z-index: 0; }
+
+        /* Sections (About & Contact) */
+        .section-padding { padding: 6rem 5%; }
+        .section-title { font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; text-align: center; }
+        .section-subtitle { text-align: center; max-width: 600px; margin: 0 auto 4rem auto; font-size: 1.1rem; }
         
-        /* Full-Size Hero Image Wrapper */
-        .hero-image-wrapper {
-            position: relative;
-            width: 100%;
-            height: 75vh; /* Scales the image to 75% of the viewport height */
-            min-height: 500px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        /* Bento Cards (About) */
+        .bento-card-dark {
+            background: #1e293b; border-radius: 24px; padding: 2rem; height: 100%;
+            border: 1px solid rgba(255,255,255,0.05); transition: transform 0.3s ease;
         }
+        .bento-card-dark:hover { transform: translateY(-5px); }
+        .icon-box { width: 60px; height: 60px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.5rem; margin-left: auto; margin-right: auto;}
         
-        .hero-image-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
+        /* Contact Form */
+        .contact-card { background: #1e293b; border-radius: 24px; padding: 3rem; max-width: 700px; margin: 0 auto; border: 1px solid rgba(255,255,255,0.05); }
+        .form-control-dark {
+            background-color: #0f172a; border: 1px solid rgba(255,255,255,0.1); color: white;
+            border-radius: 12px; padding: 14px 20px;
         }
+        .form-control-dark:focus { background-color: #0f172a; border-color: #4F46E5; color: white; box-shadow: none; }
+        .form-control-dark::placeholder { color: #64748b; }
     </style>
 </head>
 <body>
 
-    <!-- Top Navigation -->
-    <nav class="navbar navbar-expand-lg pt-4 px-5">
+    <!-- Header / Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-                <i class="bi bi-controller fs-2 text-primary"></i> LearnQuest
+                <img src="~/images/logo.jpg" alt="Logo" style="height: 40px; width: 40px; border-radius: 50%;">
+                LearnQuest
             </a>
             <div class="d-flex gap-4">
-                <a href="/" class="text-white text-decoration-none">Ana Sayfa</a>
-                <a href="#about" class="text-white text-decoration-none opacity-75 hover-opacity-100">Hakkımızda</a>
-                <a href="#contact" class="text-white text-decoration-none opacity-75">İletişim</a>
+                <a href="#home" class="nav-link">Ana Sayfa</a>
+                <a href="#about" class="nav-link">Hakkımızda</a>
+                <a href="#contact" class="nav-link">İletişim</a>
             </div>
         </div>
     </nav>
 
-    <!-- Main Hero Area -->
-    <div class="hero-section">
+    <!-- Hero Section -->
+    <section id="home" class="hero-section mt-5">
         <div class="container-fluid">
             <div class="row align-items-center">
                 
-                <!-- Left Column: Typography & CTAs -->
-                <div class="col-md-6 d-flex flex-column justify-content-center z-1 pe-lg-5">
+                <div class="col-md-5 z-1 pe-lg-5">
                     <h1 class="hero-title">Öğren,<br />Seviyeni Yükselt!</h1>
-                    <p class="hero-subtitle">Eğlenerek öğren, başarıya ulaş.<br />Kendin için en iyi versiyonunu oluştur!</p>
+                    <p class="hero-subtitle text-readable-muted">Eğlenerek öğren, başarıya ulaş.<br />Kendin için en iyi versiyonunu oluştur!</p>
                     
                     <div class="d-flex flex-column gap-3 align-items-start">
                         <a href="/Auth/Login" class="btn btn-primary-custom text-center text-decoration-none">Giriş Yap</a>
@@ -115,19 +113,101 @@
                     </div>
                 </div>
                 
-                <!-- Right Column: Expansive Hero Image -->
-                <div class="col-md-6 d-none d-md-block position-relative">
-                    <div class="ambient-glow"></div>
-                    <div class="hero-image-wrapper">
-                        <img src="~/images/hero-adventure.jpg" 
-                             alt="LearnQuest Adventure" 
-                             class="rounded-4 shadow-lg border border-secondary border-opacity-25" />
+                <div class="col-md-7 d-none d-md-block">
+                    <div class="hero-image-container">
+                        <div class="ambient-glow"></div>
+                        <!-- FIX: Resim uzantısı .png yerine .jpg yapıldı -->
+                        <img src="~/images/hero-adventure.jpg" alt="LearnQuest Adventure" class="shadow-lg border border-secondary border-opacity-50" />
                     </div>
                 </div>
                 
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section-padding" style="background-color: #0f172a;">
+        <div class="container">
+            <h6 class="text-primary text-center fw-bold text-uppercase tracking-wider mb-2">HAKKIMIZDA</h6>
+            <h2 class="section-title">Öğrenme Serüvenine Katıl</h2>
+            <p class="section-subtitle text-readable-muted">
+                LearnQuest, sıradan eğitimi destansı bir maceraya dönüştüren yeni nesil bir platformdur. Başarılarını kutla, seviye atla!
+            </p>
+
+            <div class="row g-4">
+                <!-- Feature 1 -->
+                <div class="col-md-4">
+                    <div class="bento-card-dark text-center">
+                        <div class="icon-box" style="background: rgba(59, 130, 246, 0.1); color: #3b82f6;">
+                            <i class="bi bi-star-fill"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">XP ve Seviyeler</h4>
+                        <p class="text-readable-muted mb-0">Her ders ve sınav sana deneyim puanı kazandırır. XP topladıkça seviye atlar, platformdaki prestijini artırırsın.</p>
+                    </div>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="col-md-4">
+                    <div class="bento-card-dark text-center">
+                        <div class="icon-box" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Epik Rozetler</h4>
+                        <p class="text-readable-muted mb-0">Zorlu görevleri tamamla, başarılarının kilidini aç ve profilinde sergileyebileceğin benzersiz rozetler kazan.</p>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="col-md-4">
+                    <div class="bento-card-dark text-center">
+                        <div class="icon-box" style="background: rgba(168, 85, 247, 0.1); color: #a855f7;">
+                            <i class="bi bi-controller"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Oyunlaştırılmış Testler</h4>
+                        <p class="text-readable-muted mb-0">Sıkıcı sınavlar yerine, zamanla yarıştığın, can haklarının olduğu interaktif soru arenalarında kendini test et.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section-padding">
+        <div class="container">
+            <div class="contact-card shadow-lg">
+                <div class="text-center mb-5">
+                    <div class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 text-primary rounded-circle mb-3" style="width: 60px; height: 60px;">
+                        <i class="bi bi-envelope-paper-fill fs-3"></i>
+                    </div>
+                    <h2 class="fw-bold mb-2">Bize Ulaşın</h2>
+                    <p class="text-readable-muted">Maceranda bir sorunla mı karşılaştın? Bize hemen mesaj gönder.</p>
+                </div>
+                
+                <form action="#" method="post">
+                    <div class="mb-4">
+                        <label class="form-label text-readable-muted small fw-medium">Adın Soyadın</label>
+                        <input type="text" class="form-control-dark w-100" placeholder="Kahramanın Adı..." required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label text-readable-muted small fw-medium">E-posta Adresin</label>
+                        <input type="email" class="form-control-dark w-100" placeholder="ornek@subu.edu.tr" required>
+                    </div>
+                    <div class="mb-5">
+                        <label class="form-label text-readable-muted small fw-medium">Mesajın</label>
+                        <textarea class="form-control-dark w-100" rows="4" placeholder="Nasıl yardımcı olabiliriz?" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary-custom w-100 d-flex justify-content-center align-items-center gap-2">
+                        Mesajı Gönder <i class="bi bi-send-fill"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 text-center border-top border-secondary border-opacity-25" style="background-color: #0b1120;">
+        <p class="text-readable-muted small mb-0">&copy; 2026 LearnQuest. Tüm Hakları Saklıdır.</p>
+    </footer>
 
 </body>
 </html>

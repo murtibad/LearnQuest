@@ -1,87 +1,75 @@
-﻿@{
-    // Get the current controller name to set the active menu item dynamically
-    var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "Home";
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - LearnQuest</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    
     <style>
-            .sidebar {
-                width: 280px; height: 100vh; position: fixed; top: 0; left: 0;
-                background-color: #0b1120; color: white; padding: 24px;
-                display: flex; flex-direction: column; z-index: 1000;
-            }
-            .main-content {
-                margin-left: 280px; min-height: 100vh;
-                background-color: var(--bg-light); padding: 24px;
-            }
-            .nav-link-custom {
-                color: #A3AED0; border-radius: 12px; padding: 12px 16px; margin-bottom: 8px;
-                display: flex; align-items: center; gap: 12px; transition: all 0.3s ease;
-                text-decoration: none; font-weight: 500;
-            }
-            .nav-link-custom:hover, .nav-link-custom.active {
-                background-color: var(--primary-blue); color: white;
-            }
+        /* Genel Arka Plan ve Yazı Rengi */
+        body { background-color: #0b1120; color: #f8fafc; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+        .app-container { display: flex; min-height: 100vh; }
+        
+        /* Dark Sidebar */
+        .sidebar { 
+            width: 250px; background-color: #0f172a; border-right: 1px solid rgba(255,255,255,0.05); 
+            display: flex; flex-direction: column; padding: 24px; position: fixed; height: 100vh; 
+        }
+        .sidebar-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; text-decoration: none; color: white; font-size: 1.25rem; font-weight: 700; }
+        .sidebar-logo img { width: 40px; height: 40px; border-radius: 50%; }
+        
+        .nav-item { margin-bottom: 8px; }
+        .nav-link { color: #cbd5e1; text-decoration: none; padding: 12px 16px; border-radius: 12px; display: flex; align-items: center; gap: 12px; font-weight: 500; transition: all 0.3s; }
+        .nav-link:hover, .nav-link.active { background-color: rgba(79, 70, 229, 0.1); color: #818cf8; }
+        
+        /* Ana İçerik */
+        .main-content { flex-grow: 1; margin-left: 250px; }
     </style>
 </head>
 <body>
-    <aside class="sidebar">
-        <a href="/" class="d-flex align-items-center gap-2 mb-5 text-white text-decoration-none">
-            <i class="bi bi-controller fs-2 text-primary"></i>
-            <span class="fs-4 fw-bold">LearnQuest</span>
-        </a>
-        <nav class="flex-column mb-auto">
-            <a href="/Dashboard" class="nav-link-custom @(currentController == "Dashboard" ? "active" : "")">
-                <i class="bi bi-house-door-fill"></i> Ana Sayfa
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <a href="/" class="sidebar-logo">
+                <img src="~/images/logo.jpg" alt="Logo">
+                LearnQuest
             </a>
-            <a href="/Courses" class="nav-link-custom @(currentController == "Courses" ? "active" : "")">
-                <i class="bi bi-book"></i> Dersler
-            </a>
-            <a href="#" class="nav-link-custom">
-                <i class="bi bi-controller"></i> Oyunlar
-            </a>
-            <!-- Added Quiz link to the sidebar -->
-            <a href="/Quiz" class="nav-link-custom @(currentController == "Quiz" ? "active" : "")">
-                <i class="bi bi-card-checklist"></i> Sınavlar
-            </a>
-            <a href="#" class="nav-link-custom">
-                <i class="bi bi-bar-chart-fill"></i> İstatistikler
-            </a>
-        </nav>
-        <a href="#" class="nav-link-custom mt-auto">
-            <i class="bi bi-box-arrow-right"></i> Çıkış Yap
-        </a>
-    </aside>
-
-    <main class="main-content">
-        <header class="d-flex justify-content-end align-items-center mb-4">
-            <div class="d-flex align-items-center gap-3">
-                <i class="bi bi-bell fs-5 text-muted"></i>
-                <div class="d-flex align-items-center gap-2 bg-white rounded-pill px-3 py-1 shadow-sm">
-                    <img src="https://ui-avatars.com/api/?name=Tayfun+Soy&background=0D8ABC&color=fff" alt="Profile" class="rounded-circle" style="width: 32px; height: 32px;">
-                    <div>
-                        <span class="fw-bold fs-6 d-block" style="line-height: 1;">Murti</span>
-                        <small class="text-muted" style="font-size: 0.75rem;">Seviye 5</small>
-                    </div>
+            
+            <nav class="flex-column flex-grow-1">
+                <div class="nav-item">
+                    <a href="/Dashboard" class="nav-link active"><i class="bi bi-house-door-fill"></i> Ana Sayfa</a>
                 </div>
-            </div>
-        </header>
-        @RenderBody()
-    </main>
+                <div class="nav-item">
+                    <a href="#" class="nav-link"><i class="bi bi-book-half"></i> Dersler</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link"><i class="bi bi-controller"></i> Oyunlar</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link"><i class="bi bi-card-checklist"></i> Sınavlar</a>
+                </div>
+                <div class="nav-item mt-4">
+                    <a href="#" class="nav-link"><i class="bi bi-bar-chart-fill"></i> İstatistikler</a>
+                </div>
+            </nav>
 
+            <div class="mt-auto">
+                <a href="/Auth/Login" class="nav-link" style="color: #94a3b8;"><i class="bi bi-box-arrow-right"></i> Çıkış Yap</a>
+            </div>
+        </aside>
+
+        <!-- Page Content -->
+        <main class="main-content">
+            @RenderBody()
+        </main>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

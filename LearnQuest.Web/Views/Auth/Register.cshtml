@@ -11,41 +11,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        body { background-color: #F4F7FE; font-family: 'Inter', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; }
-        .auth-card { background: white; border-radius: 24px; padding: 40px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-        .form-control { border-radius: 12px; padding: 12px 16px; border: 1px solid #E2E8F0; }
-        .form-control:focus { border-color: #4F46E5; box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+        body { background-color: #0b1120; font-family: 'Inter', sans-serif; height: 100vh; display: flex; align-items: center; justify-content: center; color: #ffffff; }
+        .auth-card { background: #1e293b; border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 40px; width: 100%; max-width: 450px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .form-control { background-color: #0f172a; border: 1px solid rgba(255,255,255,0.1); color: white; border-radius: 12px; padding: 12px 16px; }
+        .form-control:focus { background-color: #0f172a; border-color: #4F46E5; color: white; box-shadow: 0 0 0 3px rgba(79,70,229,0.2); }
+        .form-control::placeholder { color: #64748b; }
         .btn-primary-custom { background-color: #4F46E5; color: white; border-radius: 12px; padding: 12px; font-weight: 600; border: none; width: 100%; transition: all 0.3s; }
         .btn-primary-custom:hover { background-color: #4338ca; transform: translateY(-2px); }
+        .text-muted-custom { color: #cbd5e1 !important; }
     </style>
 </head>
 <body>
     <div class="auth-card">
         <div class="text-center mb-4">
             <a href="/" class="text-decoration-none d-inline-flex align-items-center gap-2 mb-3">
-                <i class="bi bi-controller fs-2 text-primary" style="color: #4F46E5 !important;"></i>
-                <span class="fs-4 fw-bold text-dark">LearnQuest</span>
+                <img src="~/images/logo.jpg" alt="Logo" style="height: 40px; width: 40px; border-radius: 50%;">
+                <span class="fs-4 fw-bold text-white">LearnQuest</span>
             </a>
             <h4 class="fw-bold">Maceraya Katıl!</h4>
-            <p class="text-muted">Kendi öğrenme yolculuğunu başlat.</p>
+            <p class="text-muted-custom">Kendi öğrenme yolculuğunu başlat.</p>
         </div>
-        <!-- Şimdilik form gönderildiğinde direkt Dashboard'a yönlendiriyor -->
         <form action="/Dashboard" method="get">
             <div class="mb-3">
-                <label class="form-label fw-medium text-muted small">Ad Soyad</label>
+                <label class="form-label fw-medium text-muted-custom small">Ad Soyad</label>
                 <input type="text" class="form-control" placeholder="Örn: Tayfun Soy" required>
             </div>
             <div class="mb-3">
-                <label class="form-label fw-medium text-muted small">E-posta</label>
+                <label class="form-label fw-medium text-muted-custom small">E-posta</label>
                 <input type="email" class="form-control" placeholder="ogrenci@subu.edu.tr" required>
             </div>
             <div class="mb-4">
-                <label class="form-label fw-medium text-muted small">Şifre</label>
+                <label class="form-label fw-medium text-muted-custom small">Şifre</label>
                 <input type="password" class="form-control" placeholder="••••••••" required>
             </div>
             <button type="submit" class="btn-primary-custom mb-3">Kayıt Ol</button>
-            <p class="text-center text-muted small mb-0">
-                Zaten hesabın var mı? <a href="/Auth/Login" class="text-decoration-none fw-bold" style="color: #4F46E5;">Giriş Yap</a>
+            <p class="text-center text-muted-custom small mb-0">
+                Zaten hesabın var mı? <a href="/Auth/Login" class="text-decoration-none fw-bold" style="color: #818cf8;">Giriş Yap</a>
             </p>
         </form>
     </div>

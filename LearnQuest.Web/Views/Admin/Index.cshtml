@@ -16,23 +16,31 @@
     <link rel="stylesheet" href="~/css/site.css" />
     
     <style>
+        body { background-color: var(--bg-main) !important; color: var(--text-main) !important; font-family: 'Inter', sans-serif; }
+        
         .admin-sidebar { width: 250px; height: 100vh; position: fixed; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); padding: 24px; display: flex; flex-direction: column; transition: all 0.3s ease; }
-        .admin-content { margin-left: 250px; padding: 32px; }
+        .admin-content { margin-left: 250px; padding: 32px; background-color: var(--bg-main); min-height: 100vh; transition: background-color 0.3s ease; }
         
         .admin-nav-link { color: var(--text-muted); text-decoration: none; padding: 10px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; font-weight: 500; margin-bottom: 8px; transition: all 0.3s; }
         .admin-nav-link:hover, .admin-nav-link.active { background-color: var(--hover-bg); color: var(--hover-text); }
         
         .table-bento { background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid var(--border-color); transition: all 0.3s ease; }
-        .table-bento th { background-color: var(--sidebar-bg); color: var(--text-muted); font-weight: 600; padding: 16px; border-bottom: 1px solid var(--border-color); transition: all 0.3s ease; }
-        .table-bento td { padding: 16px; vertical-align: middle; border-bottom: 1px solid var(--border-color); color: var(--text-main); transition: all 0.3s ease; }
+        .table-bento .table { background-color: transparent !important; color: var(--text-main) !important; margin-bottom: 0; }
+        .table-bento th { background-color: var(--sidebar-bg) !important; color: var(--text-muted) !important; font-weight: 600; padding: 16px; border-bottom: 1px solid var(--border-color) !important; transition: all 0.3s ease; }
+        .table-bento td { padding: 16px; vertical-align: middle; border-bottom: 1px solid var(--border-color) !important; color: var(--text-main) !important; background-color: var(--card-bg) !important; transition: all 0.3s ease; }
+        .table-bento tr:hover td { background-color: var(--hover-bg) !important; }
         
         .badge-subtle-success { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
-        .btn-icon { background: transparent; border: none; color: var(--text-muted); transition: color 0.3s; }
+        .btn-icon { background: transparent; border: none; color: var(--text-muted); transition: color 0.3s; cursor: pointer; }
         .btn-icon:hover { color: var(--text-main); }
         .btn-icon-danger:hover { color: #f87171; }
         
-        .theme-btn { background: transparent; border: 1px solid var(--border-color); border-radius: 12px; padding: 10px; width: 100%; text-align: left; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-main); transition: all 0.3s ease; margin-bottom: 10px; }
-        .theme-btn:hover { background-color: var(--border-color); }
+        .theme-btn { background: transparent; border: 1px solid var(--border-color); border-radius: 12px; padding: 10px; width: 100%; text-align: left; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-main); transition: all 0.3s ease; margin-bottom: 10px; cursor: pointer; }
+        .theme-btn:hover { background-color: var(--hover-bg); }
+
+        /* Page text colors */
+        .admin-content h2 { color: var(--text-main); }
+        .admin-content p { color: var(--text-muted); }
 
         /* Dynamic Modal Styles matching theme variables */
         .modal-content-custom {

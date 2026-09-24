@@ -4,7 +4,7 @@
 }
 
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,45 +12,26 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
     
     <style>
-        body { background-color: #0b1120; color: #ffffff; font-family: 'Inter', sans-serif; }
-        
-        /* Dark Sidebar */
-        .admin-sidebar { 
-            width: 250px; height: 100vh; position: fixed; 
-            background-color: #0f172a; border-right: 1px solid rgba(255,255,255,0.05); 
-            padding: 24px; display: flex; flex-direction: column;
-        }
+        .admin-sidebar { width: 250px; height: 100vh; position: fixed; background-color: var(--sidebar-bg); border-right: 1px solid var(--border-color); padding: 24px; display: flex; flex-direction: column; transition: all 0.3s ease; }
         .admin-content { margin-left: 250px; padding: 32px; }
         
-        /* Navigation Links */
-        .admin-nav-link { 
-            color: #cbd5e1; text-decoration: none; padding: 10px 16px; 
-            border-radius: 8px; display: flex; align-items: center; gap: 12px; 
-            font-weight: 500; margin-bottom: 8px; transition: all 0.3s;
-        }
-        .admin-nav-link:hover, .admin-nav-link.active { 
-            background-color: #4F46E5; color: white; 
-        }
+        .admin-nav-link { color: var(--text-muted); text-decoration: none; padding: 10px 16px; border-radius: 8px; display: flex; align-items: center; gap: 12px; font-weight: 500; margin-bottom: 8px; transition: all 0.3s; }
+        .admin-nav-link:hover, .admin-nav-link.active { background-color: var(--hover-bg); color: var(--hover-text); }
         
-        /* Dark Bento Table */
-        .table-bento { 
-            background: #1e293b; border-radius: 16px; overflow: hidden; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05);
-        }
-        .table-bento th { 
-            background-color: #0f172a; color: #cbd5e1; font-weight: 600; 
-            padding: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); 
-        }
-        .table-bento td { 
-            padding: 16px; vertical-align: middle; border-bottom: 1px solid rgba(255,255,255,0.05); color: #f8fafc;
-        }
+        .table-bento { background: var(--card-bg); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.05); border: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .table-bento th { background-color: var(--sidebar-bg); color: var(--text-muted); font-weight: 600; padding: 16px; border-bottom: 1px solid var(--border-color); transition: all 0.3s ease; }
+        .table-bento td { padding: 16px; vertical-align: middle; border-bottom: 1px solid var(--border-color); color: var(--text-main); transition: all 0.3s ease; }
         
-        .badge-subtle-success { background-color: rgba(16, 185, 129, 0.1); color: #34d399; }
-        .btn-icon { background: transparent; border: none; color: #94a3b8; transition: color 0.3s; }
-        .btn-icon:hover { color: #ffffff; }
+        .badge-subtle-success { background-color: rgba(16, 185, 129, 0.1); color: #10b981; }
+        .btn-icon { background: transparent; border: none; color: var(--text-muted); transition: color 0.3s; }
+        .btn-icon:hover { color: var(--text-main); }
         .btn-icon-danger:hover { color: #f87171; }
+        
+        .theme-btn { background: transparent; border: 1px solid var(--border-color); border-radius: 12px; padding: 10px; width: 100%; text-align: left; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-main); transition: all 0.3s ease; margin-bottom: 10px; }
+        .theme-btn:hover { background-color: var(--border-color); }
     </style>
 </head>
 <body>
@@ -58,9 +39,8 @@
         <div>
             <div class="d-flex align-items-center gap-2 mb-5">
                 <i class="bi bi-shield-lock-fill fs-3" style="color: #4F46E5;"></i>
-                <span class="fs-5 fw-bold text-white">Admin Panel</span>
+                <span class="fs-5 fw-bold" style="color: var(--text-main);">Admin Panel</span>
             </div>
-            
             <nav class="flex-column">
                 <a href="/Admin" class="admin-nav-link active"><i class="bi bi-grid-1x2-fill"></i> Dashboard</a>
                 <a href="#" class="admin-nav-link"><i class="bi bi-book-half"></i> Ders Yönetimi</a>
@@ -68,11 +48,13 @@
                 <a href="#" class="admin-nav-link"><i class="bi bi-gear-fill"></i> Ayarlar</a>
             </nav>
         </div>
-
         <div class="mt-auto pb-3">
-            <hr class="mb-4 border-secondary border-opacity-25" />
-            <!-- HATA ÇÖZÜMÜ: Renk açıldı ve okunabilir hale getirildi -->
-            <a href="/Dashboard" class="admin-nav-link" style="color: #cbd5e1;"><i class="bi bi-box-arrow-left"></i> Öğrenci Ekranına Dön</a>
+            <button id="themeToggle" class="theme-btn mb-3">
+                <i id="themeIcon" class="bi bi-moon-stars-fill fs-5"></i>
+                <span class="fw-medium small">Tema Değiştir</span>
+            </button>
+            <hr class="mb-4" style="border-color: var(--border-color);" />
+            <a href="/Dashboard" class="admin-nav-link"><i class="bi bi-box-arrow-left"></i> Öğrenci Ekranına Dön</a>
         </div>
     </aside>
 
@@ -80,7 +62,7 @@
         <div class="d-flex justify-content-between align-items-center mb-5">
             <div>
                 <h2 class="fw-bold mb-1">Ders Yönetimi</h2>
-                <p style="color: #cbd5e1;">Platformdaki tüm dersleri buradan ekleyebilir veya silebilirsin.</p>
+                <p class="text-muted-custom">Platformdaki tüm dersleri buradan ekleyebilir veya silebilirsin.</p>
             </div>
             <button class="btn text-white rounded-pill px-4 py-2 fw-bold shadow-sm" style="background-color: #4F46E5;">
                 <i class="bi bi-plus-lg me-2"></i> Yeni Ders Ekle
@@ -88,7 +70,7 @@
         </div>
 
         <div class="table-bento">
-            <table class="table table-borderless table-dark bg-transparent mb-0">
+            <table class="table table-borderless bg-transparent mb-0">
                 <thead>
                     <tr>
                         <th>Ders Adı</th>
@@ -106,8 +88,7 @@
                                 <span class="fw-bold">C# Temelleri</span>
                             </div>
                         </td>
-                        <!-- HATA ÇÖZÜMÜ: Badge renkleri lacivert zemine uyarlandı -->
-                        <td><span class="badge" style="background-color: rgba(79, 70, 229, 0.2); color: #818cf8; border: 1px solid rgba(79, 70, 229, 0.3);">Programlama</span></td>
+                        <td><span class="badge" style="background-color: rgba(79, 70, 229, 0.1); color: #4F46E5; border: 1px solid rgba(79, 70, 229, 0.2);">Programlama</span></td>
                         <td>124 Öğrenci</td>
                         <td><span class="badge badge-subtle-success rounded-pill px-3 py-2">Aktif</span></td>
                         <td class="text-end">
@@ -118,12 +99,11 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center gap-3">
-                                <div class="p-2 rounded" style="background-color: rgba(16, 185, 129, 0.1); color: #34d399;"><i class="bi bi-database fs-5"></i></div>
+                                <div class="p-2 rounded" style="background-color: rgba(16, 185, 129, 0.1); color: #10b981;"><i class="bi bi-database fs-5"></i></div>
                                 <span class="fw-bold">SQL Veritabanı</span>
                             </div>
                         </td>
-                        <!-- HATA ÇÖZÜMÜ: Badge renkleri lacivert zemine uyarlandı -->
-                        <td><span class="badge" style="background-color: rgba(52, 211, 153, 0.2); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3);">Veritabanı</span></td>
+                        <td><span class="badge" style="background-color: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.2);">Veritabanı</span></td>
                         <td>89 Öğrenci</td>
                         <td><span class="badge badge-subtle-success rounded-pill px-3 py-2">Aktif</span></td>
                         <td class="text-end">
@@ -135,5 +115,7 @@
             </table>
         </div>
     </main>
+
+    <script src="~/js/site.js"></script>
 </body>
 </html>

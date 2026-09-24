@@ -3,121 +3,121 @@
     ViewData["Title"] = "Dashboard";
 }
 
-<div class="container-fluid py-4" style="background-color: #0b1120; min-height: 100vh; color: #f8fafc;">
+<div class="container-fluid py-4">
     
-    <!-- Hoş Geldin Başlığı -->
+    <!-- Welcome Header -->
     <div class="d-flex justify-content-between align-items-center mb-5">
         <div>
-            <h2 class="fw-bold mb-1 d-flex align-items-center gap-2">
+            <h2 class="fw-bold mb-1 d-flex align-items-center gap-2" style="color: var(--text-main);">
                 Merhaba, Öğrenci! 
                 <span style="font-size: 1.5rem;">👋</span>
             </h2>
-            <p style="color: #cbd5e1;">Bugünün hedefi: 2 ders tamamla ve 1 sınav yap!</p>
+            <p class="text-muted-custom">Bugünün hedefi: 2 ders tamamla ve 1 sınav yap!</p>
         </div>
         <div class="d-flex align-items-center gap-3">
-            <button class="btn btn-link text-decoration-none position-relative p-2" style="color: #cbd5e1;">
+            <button class="btn btn-link text-decoration-none position-relative p-2 text-muted-custom">
                 <i class="bi bi-bell fs-5"></i>
                 <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
             </button>
-            <div class="d-flex align-items-center gap-2 bg-dark rounded-pill p-1 pe-3" style="border: 1px solid rgba(255,255,255,0.1);">
+            <div class="d-flex align-items-center gap-2 rounded-pill p-1 pe-3" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
                 <div class="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 35px; height: 35px; font-weight: bold;">
                     Ö
                 </div>
                 <div class="d-flex flex-column lh-1">
-                    <span class="fw-bold small">Öğrenci</span>
+                    <span class="fw-bold small" style="color: var(--text-main);">Öğrenci</span>
                     <span class="text-primary" style="font-size: 0.7rem;">Seviye 5</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- İstatistik Kartları -->
+    <!-- Statistics Cards -->
     <div class="row g-4 mb-5">
         <div class="col-md-3">
-            <div class="card h-100 border-0 shadow-sm" style="border-radius: 20px; background-color: #1e293b;">
+            <div class="card h-100 shadow-sm" style="border-radius: 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
                 <div class="card-body d-flex align-items-center gap-3 p-4">
                     <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 60px; height: 60px; background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
                         <i class="bi bi-book-half fs-3"></i>
                     </div>
                     <div>
-                        <p class="mb-0 small fw-medium" style="color: #94a3b8;">Toplam Ders</p>
-                        <h3 class="fw-bold mb-0">12</h3>
+                        <p class="mb-0 small fw-medium text-muted-custom">Toplam Ders</p>
+                        <h3 class="fw-bold mb-0" style="color: var(--text-main); transition: color 0.3s ease;">12</h3>
                     </div>
                 </div>
             </div>
         </div>
         
         <div class="col-md-3">
-            <div class="card h-100 border-0 shadow-sm" style="border-radius: 20px; background-color: #1e293b;">
+            <div class="card h-100 shadow-sm" style="border-radius: 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
                 <div class="card-body d-flex align-items-center gap-3 p-4">
                     <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 60px; height: 60px; background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
                         <i class="bi bi-check-circle fs-3"></i>
                     </div>
                     <div>
-                        <p class="mb-0 small fw-medium" style="color: #94a3b8;">Tamamlanan</p>
-                        <h3 class="fw-bold mb-0">8</h3>
+                        <p class="mb-0 small fw-medium text-muted-custom">Tamamlanan</p>
+                        <h3 class="fw-bold mb-0" style="color: var(--text-main); transition: color 0.3s ease;">8</h3>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="card h-100 border-0 shadow-sm" style="border-radius: 20px; background-color: #1e293b;">
+            <div class="card h-100 shadow-sm" style="border-radius: 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
                 <div class="card-body d-flex align-items-center gap-3 p-4">
                     <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 60px; height: 60px; background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
                         <i class="bi bi-star-fill fs-3"></i>
                     </div>
                     <div>
-                        <p class="mb-0 small fw-medium" style="color: #94a3b8;">Başarı Oranı</p>
-                        <h3 class="fw-bold mb-0">%85</h3>
+                        <p class="mb-0 small fw-medium text-muted-custom">Başarı Oranı</p>
+                        <h3 class="fw-bold mb-0" style="color: var(--text-main); transition: color 0.3s ease;">%85</h3>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="col-md-3">
-            <div class="card h-100 border-0 shadow-sm" style="border-radius: 20px; background-color: #1e293b;">
+            <div class="card h-100 shadow-sm" style="border-radius: 20px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
                 <div class="card-body d-flex align-items-center gap-3 p-4">
                     <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 60px; height: 60px; background-color: rgba(139, 92, 246, 0.1); color: #8b5cf6;">
                         <i class="bi bi-trophy-fill fs-3"></i>
                     </div>
                     <div>
-                        <p class="mb-0 small fw-medium" style="color: #94a3b8;">Toplam Puan</p>
-                        <h3 class="fw-bold mb-0">4.320</h3>
+                        <p class="mb-0 small fw-medium text-muted-custom">Toplam Puan</p>
+                        <h3 class="fw-bold mb-0" style="color: var(--text-main); transition: color 0.3s ease;">4.320</h3>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- İlerleme ve Görevler -->
+    <!-- Progress and Tasks -->
     <div class="row g-4">
-        <!-- Seviye İlerlemesi -->
+        <!-- Level Progress -->
         <div class="col-lg-7">
-            <div class="card border-0 shadow-sm h-100" style="border-radius: 24px; background-color: #1e293b;">
+            <div class="card shadow-sm h-100" style="border-radius: 24px; background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.3s ease;">
                 <div class="card-body p-4 p-lg-5">
                     <div class="d-flex justify-content-between align-items-end mb-4">
                         <div class="d-flex align-items-center gap-4">
                             <div class="position-relative">
-                                <i class="bi bi-shield-fill text-primary" style="font-size: 5rem; color: #4F46E5 !important;"></i>
+                                <i class="bi bi-shield-fill text-primary" style="font-size: 5rem;"></i>
                                 <span class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-4">5</span>
                             </div>
                             <div>
-                                <h4 class="fw-bold mb-1">Seviye 5</h4>
-                                <p class="mb-0" style="color: #94a3b8;">320 / 600 XP</p>
+                                <h4 class="fw-bold mb-1" style="color: var(--text-main); transition: color 0.3s ease;">Seviye 5</h4>
+                                <p class="mb-0 text-muted-custom">320 / 600 XP</p>
                             </div>
                         </div>
-                        <span class="fw-medium" style="color: #94a3b8;">Seviye 6</span>
+                        <span class="fw-medium text-muted-custom">Seviye 6</span>
                     </div>
                     
-                    <div class="progress" style="height: 12px; border-radius: 10px; background-color: #0f172a;">
+                    <div class="progress" style="height: 12px; border-radius: 10px; background-color: var(--border-color);">
                         <div class="progress-bar rounded-pill" role="progressbar" style="width: 53%; background-color: #4F46E5;" aria-valuenow="53" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Günlük Görev -->
+        <!-- Daily Quest (Always vibrant) -->
         <div class="col-lg-5">
             <div class="card border-0 shadow-sm h-100 text-white" style="border-radius: 24px; background: linear-gradient(135deg, #4F46E5 0%, #3b82f6 100%);">
                 <div class="card-body p-4 p-lg-5 d-flex flex-column justify-content-center">

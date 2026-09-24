@@ -1,0 +1,332 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <script src="~/js/site.js"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Arena - LearnQuest</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" />
+    
+    <style>
+        body { 
+            background-color: var(--bg-main); 
+            color: var(--text-main); 
+            font-family: 'Inter', sans-serif; 
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+        }
+
+        /* Top HUD (Heads Up Display) */
+        .quiz-hud {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            background-color: var(--card-bg);
+        }
+
+        .hud-stat {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .heart-icon { color: #ef4444; }
+        .diamond-icon { color: #3b82f6; }
+
+        /* Quiz Container */
+        .quiz-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 5%;
+        }
+
+        .quiz-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 50px;
+            width: 100%;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .question-text {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 40px;
+            line-height: 1.4;
+        }
+
+        /* Options Grid */
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .option-btn {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: #4F46E5;
+            background-color: rgba(79, 70, 229, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .option-btn.correct {
+            background-color: rgba(16, 185, 129, 0.1);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .option-btn.wrong {
+            background-color: rgba(239, 68, 68, 0.1);
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+
+        /* Bottom Progress */
+        .quiz-footer {
+            padding: 20px 5%;
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .progress {
+            height: 12px;
+            border-radius: 10px;
+            background-color: var(--border-color);
+        }
+
+        .progress-bar {
+            background-color: #4F46E5;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .btn-close-custom {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .btn-close-custom:hover { color: var(--text-main); }
+    </style>
+</head>
+<body>
+
+    <!-- Top HUD -->
+    <header class="quiz-hud">
+        <a href="/Dashboard" class="btn-close-custom"><i class="bi bi-x-lg"></i></a>
+        
+        <div class="d-flex gap-4">
+            <div class="hud-stat" id="livesContainer">
+                <i class="bi bi-heart-fill heart-icon"></i>
+                <i class="bi bi-heart-fill heart-icon"></i>
+                <i class="bi bi-heart-fill heart-icon"></i>
+            </div>
+            <div class="hud-stat">
+                <i class="bi bi-gem diamond-icon"></i>
+                <span id="scoreText">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Arena -->
+    <main class="quiz-container">
+        <div class="quiz-card" id="quizCard">
+            <div class="badge rounded-pill mb-4 px-3 py-2" style="background-color: rgba(79, 70, 229, 0.1); color: #4F46E5;">Soru <span id="currentQuestionNum">1</span> / 3</div>
+            
+            <h2 class="question-text" id="questionText">C# programlama dilinde konsola yazı yazdırmak için hangi komut kullanılır?</h2>
+            
+            <div class="options-grid" id="optionsGrid">
+                <button class="option-btn" data-correct="false">Console.Read()</button>
+                <button class="option-btn" data-correct="false">System.out.print()</button>
+                <button class="option-btn" data-correct="true">Console.WriteLine()</button>
+                <button class="option-btn" data-correct="false">print()</button>
+            </div>
+        </div>
+
+        <!-- Result Screen (Hidden by default) -->
+        <div class="quiz-card d-none" id="resultCard">
+            <i class="bi bi-trophy-fill mb-3" style="font-size: 5rem; color: #f59e0b;"></i>
+            <h2 class="fw-bold mb-3">Görev Tamamlandı!</h2>
+            <p class="text-muted-custom mb-4">Harika bir iş çıkardın. Macerana devam edebilirsin.</p>
+            <div class="d-flex justify-content-center gap-3">
+                <div class="p-3 rounded-4" style="background-color: var(--bg-main); border: 1px solid var(--border-color);">
+                    <div class="text-muted-custom small fw-bold">Kazanılan XP</div>
+                    <div class="fs-3 fw-bold" style="color: #4F46E5;">+150</div>
+                </div>
+            </div>
+            <a href="/Dashboard" class="btn text-white rounded-pill px-5 py-3 mt-4 fw-bold shadow-sm" style="background-color: #4F46E5;">
+                Öğrenci Paneline Dön
+            </a>
+        </div>
+    </main>
+
+    <!-- Bottom Progress Bar -->
+    <footer class="quiz-footer" id="quizFooter">
+        <div class="d-flex justify-content-between text-muted-custom small fw-bold mb-2">
+            <span>İlerleme</span>
+            <span id="progressText">%33</span>
+        </div>
+        <div class="progress">
+            <div class="progress-bar" id="progressBar" role="progressbar" style="width: 33%;"></div>
+        </div>
+    </footer>
+
+    <!-- Interactive Quiz Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const options = document.querySelectorAll('.option-btn');
+            const scoreText = document.getElementById('scoreText');
+            const livesContainer = document.getElementById('livesContainer');
+            const quizCard = document.getElementById('quizCard');
+            const resultCard = document.getElementById('resultCard');
+            const quizFooter = document.getElementById('quizFooter');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const questionText = document.getElementById('questionText');
+            
+            let score = 0;
+            let lives = 3;
+            let currentQuestion = 1;
+            const totalQuestions = 3;
+
+            // Mock Data for Next Questions
+            const mockQuestions = [
+                {
+                    q: "SQL'de veritabanından veri çekmek için hangi komut kullanılır?",
+                    options: [
+                        { text: "UPDATE", correct: false },
+                        { text: "SELECT", correct: true },
+                        { text: "INSERT", correct: false },
+                        { text: "DELETE", correct: false }
+                    ]
+                },
+                {
+                    q: "Aşağıdakilerden hangisi bir Frontend teknolojisi değildir?",
+                    options: [
+                        { text: "HTML", correct: false },
+                        { text: "CSS", correct: false },
+                        { text: "PostgreSQL", correct: true },
+                        { text: "JavaScript", correct: false }
+                    ]
+                }
+            ];
+
+            const updateProgress = () => {
+                const percentage = (currentQuestion / totalQuestions) * 100;
+                progressBar.style.width = percentage + '%';
+                progressText.innerText = '%' + Math.round(percentage);
+            };
+
+            const loadNextQuestion = () => {
+                if (currentQuestion >= totalQuestions) {
+                    setTimeout(() => {
+                        quizCard.classList.add('d-none');
+                        quizFooter.classList.add('d-none');
+                        resultCard.classList.remove('d-none');
+                    }, 1000);
+                    return;
+                }
+
+                const nextQ = mockQuestions[currentQuestion - 1];
+                
+                setTimeout(() => {
+                    quizCard.style.opacity = '0';
+                    quizCard.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        document.getElementById('currentQuestionNum').innerText = currentQuestion + 1;
+                        questionText.innerText = nextQ.q;
+                        
+                        const buttons = document.querySelectorAll('.option-btn');
+                        buttons.forEach((btn, index) => {
+                            btn.innerText = nextQ.options[index].text;
+                            btn.dataset.correct = nextQ.options[index].correct;
+                            btn.className = 'option-btn';
+                            btn.disabled = false;
+                        });
+
+                        currentQuestion++;
+                        updateProgress();
+
+                        quizCard.style.opacity = '1';
+                        quizCard.style.transform = 'translateY(0)';
+                    }, 300);
+                }, 1000);
+            };
+
+            options.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const selectedBtn = e.target;
+                    const isCorrect = selectedBtn.dataset.correct === 'true';
+
+                    // Disable all buttons to prevent multiple clicks
+                    options.forEach(b => b.disabled = true);
+
+                    if (isCorrect) {
+                        selectedBtn.classList.add('correct');
+                        score += 50;
+                        scoreText.innerText = score;
+                    } else {
+                        selectedBtn.classList.add('wrong');
+                        lives--;
+                        
+                        // Update hearts
+                        const hearts = livesContainer.querySelectorAll('i');
+                        if(hearts[lives]) {
+                            hearts[lives].classList.remove('bi-heart-fill', 'heart-icon');
+                            hearts[lives].classList.add('bi-heart');
+                            hearts[lives].style.color = 'var(--text-muted)';
+                        }
+
+                        // Show correct answer
+                        options.forEach(b => {
+                            if (b.dataset.correct === 'true') b.classList.add('correct');
+                        });
+                        
+                        if (lives <= 0) {
+                            setTimeout(() => {
+                                alert('Can hakkınız bitti! Yönlendiriliyorsunuz...');
+                                window.location.href = '/Dashboard';
+                            }, 1000);
+                            return;
+                        }
+                    }
+
+                    loadNextQuestion();
+                });
+            });
+        });
+    </script>
+</body>
+</html>

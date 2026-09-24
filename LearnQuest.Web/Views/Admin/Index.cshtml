@@ -33,6 +33,41 @@
         
         .theme-btn { background: transparent; border: 1px solid var(--border-color); border-radius: 12px; padding: 10px; width: 100%; text-align: left; display: flex; align-items: center; justify-content: center; gap: 10px; color: var(--text-main); transition: all 0.3s ease; margin-bottom: 10px; }
         .theme-btn:hover { background-color: var(--border-color); }
+
+        /* Dynamic Modal Styles matching theme variables */
+        .modal-content-custom {
+            background-color: var(--card-bg);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        .modal-header-custom {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 24px;
+        }
+        .modal-footer-custom {
+            border-top: 1px solid var(--border-color);
+            padding: 16px 24px;
+        }
+        .form-control-modal, .form-select-modal {
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            border-radius: 12px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+        }
+        .form-control-modal:focus, .form-select-modal:focus {
+            background-color: var(--bg-main);
+            border-color: #4F46E5;
+            color: var(--text-main);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+        }
+        .form-control-modal::placeholder {
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
@@ -65,13 +100,14 @@
                 <h2 class="fw-bold mb-1">Ders Yönetimi</h2>
                 <p class="text-muted-custom">Platformdaki tüm dersleri buradan ekleyebilir veya silebilirsin.</p>
             </div>
-            <button class="btn text-white rounded-pill px-4 py-2 fw-bold shadow-sm" style="background-color: #4F46E5;">
+            <!-- Modal Trigger Button -->
+            <button class="btn text-white rounded-pill px-4 py-2 fw-bold shadow-sm" style="background-color: #4F46E5;" data-bs-toggle="modal" data-bs-target="#addCourseModal">
                 <i class="bi bi-plus-lg me-2"></i> Yeni Ders Ekle
             </button>
         </div>
 
         <div class="table-bento">
-            <table class="table table-borderless bg-transparent mb-0">
+            <table class="table table-borderless bg-transparent mb-0" id="courseTable">
                 <thead>
                     <tr>
                         <th>Ders Adı</th>
@@ -81,7 +117,7 @@
                         <th class="text-end">İşlemler</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="courseTableBody">
                     <tr>
                         <td>
                             <div class="d-flex align-items-center gap-3">
@@ -94,7 +130,7 @@
                         <td><span class="badge badge-subtle-success rounded-pill px-3 py-2">Aktif</span></td>
                         <td class="text-end">
                             <button class="btn-icon me-2"><i class="bi bi-pencil-fill"></i></button>
-                            <button class="btn-icon btn-icon-danger"><i class="bi bi-trash-fill"></i></button>
+                            <button class="btn-icon btn-icon-danger delete-btn"><i class="bi bi-trash-fill"></i></button>
                         </td>
                     </tr>
                     <tr>
@@ -109,12 +145,142 @@
                         <td><span class="badge badge-subtle-success rounded-pill px-3 py-2">Aktif</span></td>
                         <td class="text-end">
                             <button class="btn-icon me-2"><i class="bi bi-pencil-fill"></i></button>
-                            <button class="btn-icon btn-icon-danger"><i class="bi bi-trash-fill"></i></button>
+                            <button class="btn-icon btn-icon-danger delete-btn"><i class="bi bi-trash-fill"></i></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </main>
+
+    <!-- Dynamic Theme-Aware Add Course Modal -->
+    <div class="modal fade" id="addCourseModal" tabindex="-1" aria-labelledby="addCourseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content modal-content-custom">
+                <div class="modal-header modal-header-custom">
+                    <h5 class="modal-title fw-bold" id="addCourseModalLabel">
+                        <i class="bi bi-journal-plus me-2" style="color: #4F46E5;"></i>Yeni Ders Ekle
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" style="filter: var(--text-main) === '#0f172a' ? 'invert(0)' : 'invert(1)';"></button>
+                </div>
+                <form id="addCourseForm">
+                    <div class="modal-body p-4">
+                        <div class="mb-3">
+                            <label class="form-label text-muted-custom small fw-medium">Ders Başlığı</label>
+                            <input type="text" id="courseTitleInput" class="form-control form-control-modal" placeholder="Örn: Python ile Yapay Zeka" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted-custom small fw-medium">Kategori</label>
+                            <select id="courseCategorySelect" class="form-select form-select-modal" required>
+                                <option value="Programlama">Programlama</option>
+                                <option value="Veritabanı">Veritabanı</option>
+                                <option value="Web Geliştirme">Web Geliştirme</option>
+                                <option value="Yapay Zeka">Yapay Zeka</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label text-muted-custom small fw-medium">İkon Türü</label>
+                            <select id="courseIconSelect" class="form-select form-select-modal">
+                                <option value="bi-code-slash">Kod (Code)</option>
+                                <option value="bi-database">Veritabanı (Database)</option>
+                                <option value="bi-cpu">İşlemci / AI (CPU)</option>
+                                <option value="bi-globe">Web (Globe)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="modal-footer modal-footer-custom">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">İptal</button>
+                        <button type="submit" class="btn text-white rounded-pill px-4 fw-semibold" style="background-color: #4F46E5;">Dersi Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper (Required for Modals) -->
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Client-side Interactive Table Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const addCourseForm = document.getElementById('addCourseForm');
+            const courseTableBody = document.getElementById('courseTableBody');
+            const addCourseModalEl = document.getElementById('addCourseModal');
+            const modalInstance = new bootstrap.Modal(addCourseModalEl);
+
+            // Handle Add Course Form Submission
+            addCourseForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const title = document.getElementById('courseTitleInput').value.trim();
+                const category = document.getElementById('courseCategorySelect').value;
+                const icon = document.getElementById('courseIconSelect').value;
+
+                if (!title) return;
+
+                // Category Badge Style logic
+                let badgeColor = '#4F46E5';
+                let badgeBg = 'rgba(79, 70, 229, 0.1)';
+                if (category === 'Veritabanı') {
+                    badgeColor = '#10b981';
+                    badgeBg = 'rgba(16, 185, 129, 0.1)';
+                } else if (category === 'Yapay Zeka') {
+                    badgeColor = '#f59e0b';
+                    badgeBg = 'rgba(245, 158, 11, 0.1)';
+                }
+
+                // Create new row
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="p-2 rounded" style="background-color: ${badgeBg}; color: ${badgeColor};">
+                                <i class="bi ${icon} fs-5"></i>
+                            </div>
+                            <span class="fw-bold">${title}</span>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="badge" style="background-color: ${badgeBg}; color: ${badgeColor}; border: 1px solid ${badgeColor}33;">
+                            ${category}
+                        </span>
+                    </td>
+                    <td>0 Öğrenci</td>
+                    <td><span class="badge badge-subtle-success rounded-pill px-3 py-2">Aktif</span></td>
+                    <td class="text-end">
+                        <button class="btn-icon me-2"><i class="bi bi-pencil-fill"></i></button>
+                        <button class="btn-icon btn-icon-danger delete-btn"><i class="bi bi-trash-fill"></i></button>
+                    </td>
+                `;
+
+                // Add to table with subtle animation
+                tr.style.opacity = '0';
+                tr.style.transform = 'translateY(-10px)';
+                tr.style.transition = 'all 0.3s ease';
+                courseTableBody.prepend(tr);
+
+                setTimeout(() => {
+                    tr.style.opacity = '1';
+                    tr.style.transform = 'translateY(0)';
+                }, 50);
+
+                // Reset and Close Modal
+                addCourseForm.reset();
+                modalInstance.hide();
+            });
+
+            // Delegate Delete Event
+            courseTableBody.addEventListener('click', (e) => {
+                const deleteBtn = e.target.closest('.delete-btn');
+                if (deleteBtn) {
+                    const row = deleteBtn.closest('tr');
+                    row.style.opacity = '0';
+                    row.style.transform = 'translateX(20px)';
+                    row.style.transition = 'all 0.3s ease';
+                    setTimeout(() => row.remove(), 300);
+                }
+            });
+        });
+    </script>
 </body>
 </html>

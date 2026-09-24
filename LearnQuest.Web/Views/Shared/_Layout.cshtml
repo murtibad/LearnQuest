@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - LearnQuest</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%234F46E5'><path d='M8 2.223 1 5.373v.13l7 3.15 7-3.15v-.13L8 2.223zm0 6.5-6-2.7v5.47c0 1.25.968 2.378 2.802 2.92C6.183 14.836 7.151 15 8 15c.849 0 1.817-.164 3.198-.587 1.834-.542 2.802-1.67 2.802-2.92V6.023l-6 2.7z'/></svg>">
     <script src="~/js/site.js" asp-append-version="true"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,7 +22,6 @@
             transition: background-color 0.3s ease, border-color 0.3s ease;
         }
         .sidebar-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; text-decoration: none; color: var(--text-main); font-size: 1.25rem; font-weight: 700; transition: color 0.3s ease;}
-        .sidebar-logo img { width: 40px; height: 40px; border-radius: 50%; }
         
         .nav-item { margin-bottom: 4px; }
         .nav-link { color: var(--text-muted); text-decoration: none; padding: 12px 16px; border-radius: 12px; display: flex; align-items: center; gap: 12px; font-weight: 500; transition: all 0.3s; }
@@ -50,7 +50,9 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <a href="/" class="sidebar-logo">
-                <img src="~/images/logo.jpg" alt="Logo">
+                <div class="logo-icon logo-icon-lg">
+                    <i class="bi bi-mortarboard-fill"></i>
+                </div>
                 LearnQuest
             </a>
             

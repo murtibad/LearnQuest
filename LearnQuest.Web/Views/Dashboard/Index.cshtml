@@ -15,11 +15,19 @@
             <p class="text-muted-custom mb-0">Bugünün hedefi: 2 ders tamamla ve 1 sınav yap!</p>
         </div>
         <div class="d-flex align-items-center gap-3">
-            <button class="btn btn-link text-decoration-none position-relative p-2 text-muted-custom" aria-label="Bildirimler">
-                <i class="bi bi-bell fs-5"></i>
-                <span class="position-absolute translate-middle p-1 bg-danger border border-light rounded-circle" style="top: 12px; right: 2px;"></span>
-            </button>
-            <div class="d-flex align-items-center gap-2 rounded-pill p-1 pe-3" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
+            <div class="dropdown">
+                <button class="btn btn-link text-decoration-none position-relative p-2 text-muted-custom" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Bildirimler">
+                    <i class="bi bi-bell fs-5"></i>
+                    <span class="position-absolute translate-middle p-1 bg-danger border border-light rounded-circle" style="top: 12px; right: 2px;"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="notificationDropdown" style="background-color: var(--card-bg); border-color: var(--border-color); min-width: 250px;">
+                    <li><h6 class="dropdown-header text-muted">Bildirimler</h6></li>
+                    <li><a class="dropdown-item py-2" href="#" style="color: var(--text-main);"><i class="bi bi-trophy text-warning me-2"></i><strong>Seri Katili</strong> rozeti kazandın!</a></li>
+                    <li><a class="dropdown-item py-2" href="#" style="color: var(--text-main);"><i class="bi bi-book text-primary me-2"></i>C# dersi güncellendi.</a></li>
+                </ul>
+            </div>
+            
+            <a href="/Dashboard/Profile" class="text-decoration-none d-flex align-items-center gap-2 rounded-pill p-1 pe-3 user-profile-btn" style="background-color: var(--card-bg); border: 1px solid var(--border-color); transition: all 0.2s;">
                 <div class="text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 36px; height: 36px; background-color: var(--primary); font-weight: 700; font-size: 0.85rem;">
                     TS
                 </div>
@@ -27,7 +35,7 @@
                     <span class="fw-bold small" style="color: var(--text-main);">Tayfun Soy</span>
                     <span class="mt-1" style="color: var(--primary); font-size: 0.72rem; font-weight: 600;">Seviye 5</span>
                 </div>
-            </div>
+            </a>
         </div>
     </div>
 

@@ -17,7 +17,7 @@
         <div class="d-flex align-items-center gap-3">
             <button class="btn btn-link text-decoration-none position-relative p-2 text-muted-custom" aria-label="Bildirimler">
                 <i class="bi bi-bell fs-5"></i>
-                <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
+                <span class="position-absolute translate-middle p-1 bg-danger border border-light rounded-circle" style="top: 12px; right: 2px;"></span>
             </button>
             <div class="d-flex align-items-center gap-2 rounded-pill p-1 pe-3" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
                 <div class="text-white rounded-circle d-flex justify-content-center align-items-center" style="width: 36px; height: 36px; background-color: var(--primary); font-weight: 700; font-size: 0.85rem;">
@@ -204,7 +204,7 @@
 
                 <!-- Tümünü Gör link -->
                 <div class="text-center pt-3 mt-1">
-                    <a href="#" class="text-decoration-none fw-semibold small d-inline-flex align-items-center gap-1" style="color: var(--primary);">
+                    <a href="/Dashboard/Profile" class="text-decoration-none fw-semibold small d-inline-flex align-items-center gap-1" style="color: var(--primary); transition: opacity 0.2s;" onmouseover="this.style.opacity=0.8" onmouseout="this.style.opacity=1">
                         <span>Tümünü Gör</span>
                         <i class="bi bi-arrow-right"></i>
                     </a>

@@ -23,15 +23,15 @@
             <span class="input-group-text border-end-0 rounded-start-pill">
                 <i class="bi bi-search"></i>
             </span>
-            <input type="text" class="form-control border-start-0 rounded-end-pill shadow-none" placeholder="Ders ara...">
+            <input type="text" id="searchInput" class="form-control border-start-0 rounded-end-pill shadow-none" placeholder="Ders ara..." onkeyup="filterCourses()" style="background-color: var(--bg-main); border-color: var(--border-color); color: var(--text-main);">
         </div>
 
         <!-- Category Filters -->
         <div class="d-flex gap-2 flex-wrap">
             <button class="btn rounded-pill px-4 py-2 fw-semibold text-white" style="background-color: #4F46E5;">Tümü</button>
-            <button class="btn rounded-pill px-4 py-2 fw-semibold" style="background-color: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-color);">Programlama</button>
+            <button class="btn rounded-pill px-4 py-2 fw-semibold filter-btn" data-filter="programlama" style="background-color: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-color);">Programlama</button>
             <button class="btn rounded-pill px-4 py-2 fw-semibold" style="background-color: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-color);">Veritabanı</button>
-            <button class="btn rounded-pill px-4 py-2 fw-semibold" style="background-color: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-color);">Web</button>
+            <button class="btn rounded-pill px-4 py-2 fw-semibold filter-btn" data-filter="web" style="background-color: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-color);">Web</button>
             <button class="btn rounded-pill px-4 py-2 fw-semibold" style="background-color: var(--card-bg); color: var(--text-muted); border: 1px solid var(--border-color);">Diğer</button>
         </div>
     </div>
@@ -39,13 +39,12 @@
     <!-- Course Cards Grid -->
     <div class="row g-4">
         
-        <!-- C# Temelleri -->
-        <div class="col-lg-4 col-md-6">
+        <!-- C# Temelleri -->`n        <div class="col-lg-4 col-md-6 course-item" data-category="programlama">
             <div class="bento-card position-relative h-100">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-4 mb-3" style="width: 56px; height: 56px; background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
                     <i class="bi bi-code-slash fs-3"></i>
                 </div>
-                <h5 class="fw-bold mb-1" style="color: var(--text-main);">C# Temelleri</h5>
+                <h5 class="fw-bold mb-1 course-title" style="color: var(--text-main);">C# Temelleri</h5>
                 <p class="text-muted-custom small mb-3">%80 tamamlandı</p>
                 <div class="progress" style="height: 6px; border-radius: 6px;">
                     <div class="progress-bar rounded-pill" role="progressbar" style="width: 80%; background-color: #3b82f6;"></div>
@@ -54,13 +53,12 @@
             </div>
         </div>
 
-        <!-- ASP.NET MVC -->
-        <div class="col-lg-4 col-md-6">
+        <!-- ASP.NET MVC -->`n        <div class="col-lg-4 col-md-6 course-item" data-category="web">
             <div class="bento-card position-relative h-100">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-4 mb-3" style="width: 56px; height: 56px; background-color: rgba(139, 92, 246, 0.1); color: var(--purple-badge);">
                     <i class="bi bi-braces-asterisk fs-3"></i>
                 </div>
-                <h5 class="fw-bold mb-1" style="color: var(--text-main);">ASP.NET MVC</h5>
+                <h5 class="fw-bold mb-1 course-title" style="color: var(--text-main);">ASP.NET MVC</h5>
                 <p class="text-muted-custom small mb-3">%45 tamamlandı</p>
                 <div class="progress" style="height: 6px; border-radius: 6px;">
                     <div class="progress-bar rounded-pill" role="progressbar" style="width: 45%; background-color: var(--purple-badge);"></div>
@@ -75,7 +73,7 @@
                 <div class="d-inline-flex align-items-center justify-content-center rounded-4 mb-3" style="width: 56px; height: 56px; background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
                     <i class="bi bi-database fs-3"></i>
                 </div>
-                <h5 class="fw-bold mb-1" style="color: var(--text-main);">SQL Veritabanı</h5>
+                <h5 class="fw-bold mb-1 course-title" style="color: var(--text-main);">SQL Veritabanı</h5>
                 <p class="text-muted-custom small mb-3">%70 tamamlandı</p>
                 <div class="progress" style="height: 6px; border-radius: 6px;">
                     <div class="progress-bar rounded-pill" role="progressbar" style="width: 70%; background-color: #10b981;"></div>
@@ -84,13 +82,12 @@
             </div>
         </div>
 
-        <!-- JavaScript -->
-        <div class="col-lg-4 col-md-6">
+        <!-- JavaScript -->`n        <div class="col-lg-4 col-md-6 course-item" data-category="web">
             <div class="bento-card position-relative h-100">
                 <div class="d-inline-flex align-items-center justify-content-center rounded-4 mb-3" style="width: 56px; height: 56px; background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
                     <i class="bi bi-filetype-js fs-3"></i>
                 </div>
-                <h5 class="fw-bold mb-1" style="color: var(--text-main);">JavaScript</h5>
+                <h5 class="fw-bold mb-1 course-title" style="color: var(--text-main);">JavaScript</h5>
                 <p class="text-muted-custom small mb-3">%30 tamamlandı</p>
                 <div class="progress" style="height: 6px; border-radius: 6px;">
                     <div class="progress-bar rounded-pill" role="progressbar" style="width: 30%; background-color: #f59e0b;"></div>
@@ -105,7 +102,7 @@
                 <div class="d-inline-flex align-items-center justify-content-center rounded-4 mb-3" style="width: 56px; height: 56px; background-color: rgba(239, 68, 68, 0.1); color: #ef4444;">
                     <i class="bi bi-filetype-html fs-3"></i>
                 </div>
-                <h5 class="fw-bold mb-1" style="color: var(--text-main);">HTML & CSS</h5>
+                <h5 class="fw-bold mb-1 course-title" style="color: var(--text-main);">HTML & CSS</h5>
                 <p class="text-muted-custom small mb-3">%100 tamamlandı</p>
                 <div class="progress" style="height: 6px; border-radius: 6px;">
                     <div class="progress-bar rounded-pill" role="progressbar" style="width: 100%; background-color: #ef4444;"></div>
@@ -120,7 +117,7 @@
                 <div class="d-inline-flex align-items-center justify-content-center rounded-4 mb-3" style="width: 56px; height: 56px; background-color: rgba(6, 182, 212, 0.1); color: #06b6d4;">
                     <i class="bi bi-diagram-3-fill fs-3"></i>
                 </div>
-                <h5 class="fw-bold mb-1" style="color: var(--text-main);">OOP ve Tasarım Desenleri</h5>
+                <h5 class="fw-bold mb-1 course-title" style="color: var(--text-main);">OOP ve Tasarım Desenleri</h5>
                 <p class="text-muted-custom small mb-3">%20 tamamlandı</p>
                 <div class="progress" style="height: 6px; border-radius: 6px;">
                     <div class="progress-bar rounded-pill" role="progressbar" style="width: 20%; background-color: #06b6d4;"></div>
@@ -132,3 +129,45 @@
     </div>
 </div>
 </div>
+@section Scripts {
+    <script>
+        let currentFilter = 'all';
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.style.backgroundColor = 'var(--card-bg)';
+                    b.style.color = 'var(--text-muted)';
+                    b.classList.remove('text-white');
+                });
+                
+                const target = e.target;
+                target.style.backgroundColor = '#4F46E5';
+                target.style.color = 'white';
+                target.classList.add('text-white');
+                
+                currentFilter = target.getAttribute('data-filter');
+                filterCourses();
+            });
+        });
+
+        function filterCourses() {
+            const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.course-item');
+            
+            items.forEach(item => {
+                const category = item.getAttribute('data-category');
+                const title = item.querySelector('.course-title').innerText.toLowerCase();
+                
+                const matchesCategory = (currentFilter === 'all' || category === currentFilter);
+                const matchesSearch = title.includes(searchQuery);
+                
+                if (matchesCategory && matchesSearch) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+}

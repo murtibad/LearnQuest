@@ -225,8 +225,8 @@
         </div>
     </div>
 
-    <!-- Rozetler Section (Visible below tabs even if not active tab) -->
-    <div id="rozetlerSection" class="mb-5">
+    <!-- Rozetler Section (Hidden by default) -->
+    <div id="rozetlerSection" class="mb-5 d-none tab-content-panel">
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
             <div>
                 <h4 class="fw-bold mb-1" style="color: var(--text-main);">Rozetler</h4>
@@ -305,31 +305,73 @@
             </div>
         </div>
     </div>
+
+    <!-- Başarılar Section (Hidden by default) -->
+    <div id="basarilarSection" class="mb-5 d-none tab-content-panel">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+            <div>
+                <h4 class="fw-bold mb-1" style="color: var(--text-main);">Başarılar</h4>
+                <p class="text-muted-custom small mb-0">Platformda kazandığın kupa ve başarımlar</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-12 col-md-6">
+                <div class="bento-card h-100 shadow-sm d-flex align-items-center gap-3" style="border-radius: 20px;">
+                    <div class="badge-icon flex-shrink-0" style="background-color: rgba(245, 158, 11, 0.15); color: #f59e0b; width: 60px; height: 60px;">
+                        <i class="bi bi-trophy-fill fs-3"></i>
+                    </div>
+                    <div class="w-100">
+                        <div class="d-flex justify-content-between mb-1">
+                            <h6 class="fw-bold mb-0" style="color: var(--text-main);">Yenilmez Öğrenci</h6>
+                            <span class="small text-muted-custom">5/5</span>
+                        </div>
+                        <div class="progress" style="height: 8px; border-radius: 10px; background-color: var(--border-color);">
+                            <div class="progress-bar bg-warning rounded-pill" role="progressbar" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="bento-card h-100 shadow-sm d-flex align-items-center gap-3" style="border-radius: 20px;">
+                    <div class="badge-icon flex-shrink-0" style="background-color: rgba(16, 185, 129, 0.15); color: #10b981; width: 60px; height: 60px;">
+                        <i class="bi bi-check2-all fs-3"></i>
+                    </div>
+                    <div class="w-100">
+                        <div class="d-flex justify-content-between mb-1">
+                            <h6 class="fw-bold mb-0" style="color: var(--text-main);">Seri Katili</h6>
+                            <span class="small text-muted-custom">3/7 Gün</span>
+                        </div>
+                        <div class="progress" style="height: 8px; border-radius: 10px; background-color: var(--border-color);">
+                            <div class="progress-bar bg-success rounded-pill" role="progressbar" style="width: 42%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
     <script>
+        // Make istatistikler tab have the class so we can query them all
+        document.getElementById('istatistiklerTabContent').classList.add('tab-content-panel');
+        
         function selectTab(tab) {
+            // Remove active from all tabs
             document.querySelectorAll('.tab-custom').forEach(el => el.classList.remove('active'));
+            // Hide all panels
+            document.querySelectorAll('.tab-content-panel').forEach(el => el.classList.add('d-none'));
             
+            // Show requested panel
             if (tab === 'stats') {
                 document.getElementById('tabBtnStats').classList.add('active');
-                const target = document.getElementById('istatistiklerTabContent');
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                document.getElementById('istatistiklerTabContent').classList.remove('d-none');
             } else if (tab === 'badges') {
                 document.getElementById('tabBtnBadges').classList.add('active');
-                const target = document.getElementById('rozetlerSection');
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                document.getElementById('rozetlerSection').classList.remove('d-none');
             } else if (tab === 'achievements') {
                 document.getElementById('tabBtnAchievements').classList.add('active');
-                const target = document.getElementById('rozetlerSection');
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                document.getElementById('basarilarSection').classList.remove('d-none');
             }
         }
     </script>

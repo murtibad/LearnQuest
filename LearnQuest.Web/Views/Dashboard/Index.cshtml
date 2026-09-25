@@ -1,4 +1,4 @@
-@{
+﻿@{
     Layout = "_Layout";
     ViewData["Title"] = "Dashboard";
 }
@@ -14,7 +14,7 @@
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-5">
         <div>
             <h2 class="fw-bold mb-1 d-flex align-items-center gap-2" style="color: var(--text-main);">
-                Merhaba, <!-- @Model.FirstName -->Tayfun! 
+                Merhaba, @* Model.FirstName *@Tayfun! 
                 <span style="font-size: 1.5rem;">👋</span>
             </h2>
             <p class="text-muted-custom mb-0">Bugünün hedefi: 2 ders tamamla ve 1 sınav yap!</p>
@@ -63,8 +63,8 @@
                     TS
                 </div>
                 <div class="d-flex flex-column lh-1">
-                    <span class="fw-bold small" style="color: var(--text-main);"><!-- @Model.FirstName -->Tayfun Soy</span>
-                    <span class="mt-1" style="color: var(--primary); font-size: 0.72rem; font-weight: 600;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sonraki seviyeye 150 XP kaldı!"><!-- @Model.Level -->Seviye 5</span>
+                    <span class="fw-bold small" style="color: var(--text-main);">@* Model.FirstName *@Tayfun Soy</span>
+                    <span class="mt-1" style="color: var(--primary); font-size: 0.72rem; font-weight: 600;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sonraki seviyeye 150 XP kaldı!">@* Model.Level *@Seviye 5</span>
                 </div>
             </a>
         </div>
@@ -79,7 +79,7 @@
                 </div>
                 <div>
                     <p class="mb-0 small fw-medium text-muted-custom">Toplam Ders</p>
-                    <h3 class="fw-bold mb-0" style="color: var(--text-main);"><!-- @Model.TotalCourses -->12</h3>
+                    <h3 class="fw-bold mb-0" style="color: var(--text-main);">@* Model.TotalCourses *@12</h3>
                 </div>
             </div>
         </div>
@@ -91,7 +91,7 @@
                 </div>
                 <div>
                     <p class="mb-0 small fw-medium text-muted-custom">Tamamlanan Ders</p>
-                    <h3 class="fw-bold mb-0" style="color: var(--text-main);"><!-- @Model.CompletedCourses -->8</h3>
+                    <h3 class="fw-bold mb-0" style="color: var(--text-main);">@* Model.CompletedCourses *@8</h3>
                 </div>
             </div>
         </div>
@@ -103,7 +103,7 @@
                 </div>
                 <div>
                     <p class="mb-0 small fw-medium text-muted-custom">Başarı Oranı</p>
-                    <h3 class="fw-bold mb-0" style="color: var(--text-main);"><!-- @Model.SuccessRate -->%85</h3>
+                    <h3 class="fw-bold mb-0" style="color: var(--text-main);">@* Model.SuccessRate *@%85</h3>
                 </div>
             </div>
         </div>
@@ -115,7 +115,7 @@
                 </div>
                 <div>
                     <p class="mb-0 small fw-medium text-muted-custom">Toplam Puan</p>
-                    <h3 class="fw-bold mb-0" style="color: var(--text-main);"><!-- @Model.TotalXP -->4.320</h3>
+                    <h3 class="fw-bold mb-0" style="color: var(--text-main);">@* Model.TotalXP *@4.320</h3>
                 </div>
             </div>
         </div>
@@ -134,11 +134,11 @@
                         <div class="d-flex align-items-center gap-4">
                             <div class="position-relative d-inline-flex align-items-center justify-content-center">
                                 <i class="bi bi-shield-fill" style="font-size: 4.75rem; color: var(--primary); line-height: 1;"></i>
-                                <span class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-4"><!-- @Model.Level -->5</span>
+                                <span class="position-absolute top-50 start-50 translate-middle text-white fw-bold fs-4">@* Model.Level *@5</span>
                             </div>
                             <div>
-                                <h4 class="fw-bold mb-1" style="color: var(--text-main);"><!-- @Model.LevelName -->Seviye 5</h4>
-                                <p class="mb-0 text-muted-custom fw-medium"><!-- @Model.CurrentXP / @Model.NextLevelXP -->320 / 600 XP</p>
+                                <h4 class="fw-bold mb-1" style="color: var(--text-main);">@* Model.LevelName *@Seviye 5</h4>
+                                <p class="mb-0 text-muted-custom fw-medium">@* Model.CurrentXP / Model.NextLevelXP *@320 / 600 XP</p>
                             </div>
                         </div>
                         <span class="fw-semibold text-muted-custom">Seviye 6</span>
@@ -165,7 +165,7 @@
                         </div>
                         <div>
                             <h4 class="fw-bold mb-1 text-white">Bugünün Görevi</h4>
-                            <p class="mb-0 text-white text-opacity-75 small"><!-- @Model.DailyQuest.Description -->3 soruluk mini sınavı tamamla.</p>
+                            <p class="mb-0 text-white text-opacity-75 small">@* Model.DailyQuest.Description *@3 soruluk mini sınavı tamamla.</p>
                         </div>
                     </div>
                     <p class="text-white text-opacity-80 small mb-4">

@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewData["Title"] = "Admin Panel";
     Layout = null;
 }
@@ -6,8 +6,20 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <script src="~/js/site.js"></script>
-    <meta charset="utf-8" />
+    <!-- Inline Theme Init for Anti-FOUC -->
+    <script>
+        (function () {
+            const getPreferredTheme = () => {
+                const saved = localStorage.getItem('theme');
+                if (saved) return saved;
+                if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+                const hour = new Date().getHours();
+                return (hour >= 19 || hour < 7) ? 'dark' : 'light';
+            };
+            document.documentElement.setAttribute('data-theme', getPreferredTheme());
+        })();
+    </script>
+<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard - LearnQuest</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%234F46E5'><path d='M8 2.223 1 5.373v.13l7 3.15 7-3.15v-.13L8 2.223zm0 6.5-6-2.7v5.47c0 1.25.968 2.378 2.802 2.92C6.183 14.836 7.151 15 8 15c.849 0 1.817-.164 3.198-.587 1.834-.542 2.802-1.67 2.802-2.92V6.023l-6 2.7z'/></svg>">
@@ -245,12 +257,14 @@
             <div class="table-bento skeleton-item p-4" style="max-width: 600px;">
                 <div class="mb-4">
                     <label class="form-label fw-bold">Platform Adı</label>
-                    <input type="text" name="PlatformName" id="PlatformName" class="form-control form-control-modal" value="LearnQuest">
+                    
+                                <span data-valmsg-for="PlatformName" class="text-danger small mt-1 d-block"></span>
                 </div>
                 <div class="mb-4">
                     <label class="form-label fw-bold">Bakım Modu</label>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" name="MaintenanceMode" id="maintenanceMode">
+                        
+                                <span data-valmsg-for="MaintenanceMode" class="text-danger small mt-1 d-block"></span>
                         <label class="form-check-label text-muted-custom" for="maintenanceMode">Sistemi bakıma al</label>
                     </div>
                 </div>
@@ -273,25 +287,18 @@
                     <div class="modal-body p-4">
                         <div class="mb-3">
                             <label class="form-label text-muted-custom small fw-medium">Ders Başlığı</label>
-                            <input type="text" id="courseTitleInput" name="CourseTitle" class="form-control form-control-modal" placeholder="Örn: Python ile Yapay Zeka" required />
+                            
+                                <span data-valmsg-for="CourseTitle" class="text-danger small mt-1 d-block"></span>
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-muted-custom small fw-medium">Kategori</label>
-                            <select id="courseCategorySelect" name="CourseCategory" class="form-select form-select-modal" required>
-                                <option value="Programlama">Programlama</option>
-                                <option value="Veritabanı">Veritabanı</option>
-                                <option value="Web Geliştirme">Web Geliştirme</option>
-                                <option value="Yapay Zeka">Yapay Zeka</option>
-                            </select>
+                            
+                                <span data-valmsg-for="CourseCategory" class="text-danger small mt-1 d-block"></span>
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-muted-custom small fw-medium">İkon Türü</label>
-                            <select id="courseIconSelect" name="CourseIcon" class="form-select form-select-modal">
-                                <option value="bi-code-slash">Kod (Code)</option>
-                                <option value="bi-database">Veritabanı (Database)</option>
-                                <option value="bi-cpu">İşlemci / AI (CPU)</option>
-                                <option value="bi-globe">Web (Globe)</option>
-                            </select>
+                            
+                                <span data-valmsg-for="CourseIcon" class="text-danger small mt-1 d-block"></span>
                         </div>
                     </div>
                     <div class="modal-footer modal-footer-custom">
@@ -419,5 +426,6 @@
             });
         });
     </script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 </body>
 </html>

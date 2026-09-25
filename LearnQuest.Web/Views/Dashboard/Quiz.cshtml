@@ -1,11 +1,12 @@
+ï»¿<!-- NOTE: intentionally full-screen without sidebar layout â€” confirm with Murat if this should use _Layout instead -->
 @{
     Layout = null;
 }
 
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
-    <script src="~/js/site.js"></script>
+    @await Html.PartialAsync("_ThemeInit")
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quiz Arena - LearnQuest</title>
@@ -165,7 +166,7 @@
         <div class="quiz-card" id="quizCard">
             <div class="badge rounded-pill mb-4 px-3 py-2" style="background-color: rgba(79, 70, 229, 0.1); color: #4F46E5;">Soru <span id="currentQuestionNum">1</span> / 3</div>
             
-            <h2 class="question-text" id="questionText">C# programlama dilinde konsola yazý yazdýrmak için hangi komut kullanýlýr?</h2>
+            <h2 class="question-text" id="questionText">C# programlama dilinde konsola yazï¿½ yazdï¿½rmak iï¿½in hangi komut kullanï¿½lï¿½r?</h2>
             
             <div class="options-grid" id="optionsGrid">
                 <button class="option-btn" data-correct="false">Console.Read()</button>
@@ -178,16 +179,16 @@
         <!-- Result Screen (Hidden by default) -->
         <div class="quiz-card d-none" id="resultCard">
             <i class="bi bi-trophy-fill mb-3" style="font-size: 5rem; color: #f59e0b;"></i>
-            <h2 class="fw-bold mb-3">Görev Tamamlandý!</h2>
-            <p class="text-muted-custom mb-4">Harika bir iþ çýkardýn. Macerana devam edebilirsin.</p>
+            <h2 class="fw-bold mb-3">Gï¿½rev Tamamlandï¿½!</h2>
+            <p class="text-muted-custom mb-4">Harika bir iï¿½ ï¿½ï¿½kardï¿½n. Macerana devam edebilirsin.</p>
             <div class="d-flex justify-content-center gap-3">
                 <div class="p-3 rounded-4" style="background-color: var(--bg-main); border: 1px solid var(--border-color);">
-                    <div class="text-muted-custom small fw-bold">Kazanýlan XP</div>
+                    <div class="text-muted-custom small fw-bold">Kazanï¿½lan XP</div>
                     <div class="fs-3 fw-bold" style="color: #4F46E5;">+150</div>
                 </div>
             </div>
             <a href="/Dashboard" class="btn text-white rounded-pill px-5 py-3 mt-4 fw-bold shadow-sm" style="background-color: #4F46E5;">
-                Öðrenci Paneline Dön
+                ï¿½ï¿½renci Paneline Dï¿½n
             </a>
         </div>
     </main>
@@ -195,7 +196,7 @@
     <!-- Bottom Progress Bar -->
     <footer class="quiz-footer" id="quizFooter">
         <div class="d-flex justify-content-between text-muted-custom small fw-bold mb-2">
-            <span>Ýlerleme</span>
+            <span>ï¿½lerleme</span>
             <span id="progressText">%33</span>
         </div>
         <div class="progress">
@@ -224,7 +225,7 @@
             // Mock Data for Next Questions
             const mockQuestions = [
                 {
-                    q: "SQL'de veritabanýndan veri çekmek için hangi komut kullanýlýr?",
+                    q: "SQL'de veritabanï¿½ndan veri ï¿½ekmek iï¿½in hangi komut kullanï¿½lï¿½r?",
                     options: [
                         { text: "UPDATE", correct: false },
                         { text: "SELECT", correct: true },
@@ -233,7 +234,7 @@
                     ]
                 },
                 {
-                    q: "Aþaðýdakilerden hangisi bir Frontend teknolojisi deðildir?",
+                    q: "Aï¿½aï¿½ï¿½dakilerden hangisi bir Frontend teknolojisi deï¿½ildir?",
                     options: [
                         { text: "HTML", correct: false },
                         { text: "CSS", correct: false },
@@ -317,7 +318,7 @@
                         
                         if (lives <= 0) {
                             setTimeout(() => {
-                                alert('Can hakkýnýz bitti! Yönlendiriliyorsunuz...');
+                                alert('Can hakkï¿½nï¿½z bitti! Yï¿½nlendiriliyorsunuz...');
                                 window.location.href = '/Dashboard';
                             }, 1000);
                             return;

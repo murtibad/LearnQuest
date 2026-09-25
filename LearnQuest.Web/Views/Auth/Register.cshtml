@@ -48,19 +48,23 @@
             @Html.AntiForgeryToken()
             <div class="mb-3">
                 <label class="form-label fw-medium text-muted-custom small" for="FullName">Ad Soyad</label>
-                <input type="text" class="form-control" id="FullName" name="FullName" placeholder="Örn: Tayfun Soy" required>
+                
+                <span asp-validation-for="FullName" class="text-danger small mt-1 d-block"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label fw-medium text-muted-custom small" for="Email">E-posta</label>
-                <input type="email" class="form-control" id="Email" name="Email" placeholder="ogrenci@subu.edu.tr" required>
+                
+                <span asp-validation-for="Email" class="text-danger small mt-1 d-block"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label fw-medium text-muted-custom small" for="Password">Şifre</label>
-                <input type="password" class="form-control" id="Password" name="Password" placeholder="••••••••" required minlength="6">
+                
+                <span asp-validation-for="Password" class="text-danger small mt-1 d-block"></span>
             </div>
             <div class="mb-4">
                 <label class="form-label fw-medium text-muted-custom small" for="ConfirmPassword">Şifre Tekrar</label>
-                <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" placeholder="••••••••" required minlength="6">
+                
+                <span asp-validation-for="ConfirmPassword" class="text-danger small mt-1 d-block"></span>
             </div>
             <button type="submit" class="btn-primary-custom mb-3">Kayıt Ol</button>
             <p class="text-center text-muted-custom small mb-0">

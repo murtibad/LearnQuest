@@ -1,4 +1,4 @@
-@{
+﻿@{
     Layout = "_Layout";
     ViewData["Title"] = "Dashboard";
 }
@@ -16,7 +16,7 @@
         </div>
         <div class="d-flex align-items-center gap-3">
             <div class="dropdown">
-                <button class="btn btn-link text-decoration-none position-relative p-2 text-muted-custom" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Bildirimler">
+                <button class="btn btn-link text-decoration-none position-relative p-2 text-muted-custom" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Bildirimler" data-bs-toggle="tooltip" data-bs-placement="bottom" title="2 Yeni Bildirim">
                     <i class="bi bi-bell fs-5"></i>
                     <span class="position-absolute bg-danger border border-2 border-white rounded-circle" style="top: 4px; right: 4px; width: 10px; height: 10px;"></span>
                 </button>
@@ -59,7 +59,7 @@
                 </div>
                 <div class="d-flex flex-column lh-1">
                     <span class="fw-bold small" style="color: var(--text-main);">Tayfun Soy</span>
-                    <span class="mt-1" style="color: var(--primary); font-size: 0.72rem; font-weight: 600;">Seviye 5</span>
+                    <span class="mt-1" style="color: var(--primary); font-size: 0.72rem; font-weight: 600;" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Sonraki seviyeye 150 XP kaldı!">Seviye 5</span>
                 </div>
             </a>
         </div>
@@ -69,7 +69,7 @@
     <div class="row g-4 mb-4">
         <!-- Toplam Ders -->
         <div class="col-sm-6 col-xl-3">
-            <div class="bento-card h-100 d-flex align-items-center gap-3">
+            <div class="bento-card h-100 skeleton-item d-flex align-items-center gap-3">
                 <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 56px; height: 56px; background-color: rgba(59, 130, 246, 0.1); color: #3b82f6;">
                     <i class="bi bi-book-half fs-3"></i>
                 </div>
@@ -82,7 +82,7 @@
         
         <!-- Tamamlanan Ders -->
         <div class="col-sm-6 col-xl-3">
-            <div class="bento-card h-100 d-flex align-items-center gap-3">
+            <div class="bento-card h-100 skeleton-item d-flex align-items-center gap-3">
                 <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 56px; height: 56px; background-color: rgba(16, 185, 129, 0.1); color: #10b981;">
                     <i class="bi bi-check-circle-fill fs-3"></i>
                 </div>
@@ -95,7 +95,7 @@
 
         <!-- Başarı Oranı -->
         <div class="col-sm-6 col-xl-3">
-            <div class="bento-card h-100 d-flex align-items-center gap-3">
+            <div class="bento-card h-100 skeleton-item d-flex align-items-center gap-3">
                 <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 56px; height: 56px; background-color: rgba(245, 158, 11, 0.1); color: #f59e0b;">
                     <i class="bi bi-star-fill fs-3"></i>
                 </div>
@@ -108,7 +108,7 @@
 
         <!-- Toplam Puan -->
         <div class="col-sm-6 col-xl-3">
-            <div class="bento-card h-100 d-flex align-items-center gap-3">
+            <div class="bento-card h-100 skeleton-item d-flex align-items-center gap-3">
                 <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" style="width: 56px; height: 56px; background-color: rgba(139, 92, 246, 0.1); color: var(--purple-badge);">
                     <i class="bi bi-trophy-fill fs-3"></i>
                 </div>
@@ -124,7 +124,7 @@
     <div class="row g-4 mb-4">
         <!-- Level Progress -->
         <div class="col-lg-7">
-            <div class="bento-card h-100 p-4 p-lg-5 d-flex flex-column justify-content-between">
+            <div class="bento-card h-100 skeleton-item p-4 p-lg-5 d-flex flex-column justify-content-between">
                 <div>
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h5 class="fw-bold mb-0" style="color: var(--text-main);">Seviye İlerlemesi</h5>
@@ -248,3 +248,13 @@
     </div>
 
 </div>
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const skeletons = document.querySelectorAll(".skeleton-item");
+            skeletons.forEach(el => el.classList.add("skeleton"));
+            setTimeout(() => { skeletons.forEach(el => el.classList.remove("skeleton")); }, 800);
+            setTimeout(() => { if(window.Toast) { window.Toast.fire({ icon: "info", title: "Tekrar hoş geldin, Tayfun!" }); } }, 1000);
+        });
+    </script>
+}

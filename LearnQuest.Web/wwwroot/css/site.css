@@ -288,3 +288,25 @@ a {
 .logo-icon-lg { width: 42px; height: 42px; font-size: 1.3rem; border-radius: 12px; }
 
 .user-profile-btn:hover { background-color: var(--hover-bg) !important; transform: translateY(-2px); }
+
+/* Notification Dropdown Customizations */
+.notification-dropdown {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    min-width: 320px;
+    border-radius: 16px;
+    padding: 0;
+    overflow: hidden;
+    animation: fadeInDropdown 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.notification-dropdown .dropdown-item {
+    transition: background-color 0.2s ease;
+    white-space: normal;
+}
+.notification-dropdown .dropdown-item:hover {
+    background-color: var(--hover-bg) !important;
+}
+@@keyframes fadeInDropdown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

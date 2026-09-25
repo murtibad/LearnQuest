@@ -245,15 +245,15 @@
             </div>
             <div class="table-bento skeleton-item p-4" style="max-width: 600px;">
                 <div class="mb-4">
-                    <label class="form-label fw-bold">Platform Adı</label>
-                    
-                                <span data-valmsg-for="PlatformName" class="text-danger small mt-1 d-block"></span>
+                    <label class="form-label fw-bold" for="PlatformName">Platform Adı</label>
+                    <input type="text" class="form-control" id="PlatformName" name="PlatformName" value="LearnQuest">
+                    <span data-valmsg-for="PlatformName" class="text-danger small mt-1 d-block"></span>
                 </div>
                 <div class="mb-4">
                     <label class="form-label fw-bold">Bakım Modu</label>
                     <div class="form-check form-switch">
-                        
-                                <span data-valmsg-for="MaintenanceMode" class="text-danger small mt-1 d-block"></span>
+                        <input class="form-check-input" type="checkbox" id="maintenanceMode" name="MaintenanceMode">
+                        <span data-valmsg-for="MaintenanceMode" class="text-danger small mt-1 d-block"></span>
                         <label class="form-check-label text-muted-custom" for="maintenanceMode">Sistemi bakıma al</label>
                     </div>
                 </div>
@@ -275,19 +275,23 @@
                 <form id="addCourseForm">
                     <div class="modal-body p-4">
                         <div class="mb-3">
-                            <label class="form-label text-muted-custom small fw-medium">Ders Başlığı</label>
-                            
-                                <span data-valmsg-for="CourseTitle" class="text-danger small mt-1 d-block"></span>
+                            <label class="form-label text-muted-custom small fw-medium" for="CourseTitle">Ders Başlığı</label>
+                            <input type="text" class="form-control" id="CourseTitle" name="CourseTitle" placeholder="Örn: C# İleri Seviye">
+                            <span data-valmsg-for="CourseTitle" class="text-danger small mt-1 d-block"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label text-muted-custom small fw-medium">Kategori</label>
-                            
-                                <span data-valmsg-for="CourseCategory" class="text-danger small mt-1 d-block"></span>
+                            <label class="form-label text-muted-custom small fw-medium" for="CourseCategory">Kategori</label>
+                            <select class="form-select" id="CourseCategory" name="CourseCategory">
+                                <option value="programlama">Programlama</option>
+                                <option value="web">Web</option>
+                                <option value="veritabani">Veritabanı</option>
+                            </select>
+                            <span data-valmsg-for="CourseCategory" class="text-danger small mt-1 d-block"></span>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label text-muted-custom small fw-medium">İkon Türü</label>
-                            
-                                <span data-valmsg-for="CourseIcon" class="text-danger small mt-1 d-block"></span>
+                            <label class="form-label text-muted-custom small fw-medium" for="CourseIcon">İkon Türü</label>
+                            <input type="text" class="form-control" id="CourseIcon" name="CourseIcon" placeholder="Örn: bi-code-slash">
+                            <span data-valmsg-for="CourseIcon" class="text-danger small mt-1 d-block"></span>
                         </div>
                     </div>
                     <div class="modal-footer modal-footer-custom">

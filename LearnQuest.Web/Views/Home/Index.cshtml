@@ -400,18 +400,19 @@
                         <h2 class="fw-bold mb-2" style="color: var(--text-main);">Bize Ulaşın</h2>
                         <p class="text-muted-custom">Maceranda bir sorunla mı karşılaştın? Bize hemen mesaj gönder.</p>
                     </div>
-                    <form action="#" method="post">
+                    <form action="/Home/Contact" method="post">
+                        @Html.AntiForgeryToken()
                         <div class="mb-4">
-                            <label class="form-label text-muted-custom small fw-medium">Adın Soyadın</label>
-                            <input type="text" class="form-control-home" placeholder="Kahramanın Adı..." required>
+                            <label for="ContactName" class="form-label text-muted-custom small fw-medium">Adın Soyadın</label>
+                            <input type="text" class="form-control-home" id="ContactName" name="ContactName" placeholder="Kahramanın Adı..." required>
                         </div>
                         <div class="mb-4">
-                            <label class="form-label text-muted-custom small fw-medium">E-posta Adresin</label>
-                            <input type="email" class="form-control-home" placeholder="ornek@subu.edu.tr" required>
+                            <label for="ContactEmail" class="form-label text-muted-custom small fw-medium">E-posta Adresin</label>
+                            <input type="email" class="form-control-home" id="ContactEmail" name="ContactEmail" placeholder="ornek@subu.edu.tr" required>
                         </div>
                         <div class="mb-5">
-                            <label class="form-label text-muted-custom small fw-medium">Mesajın</label>
-                            <textarea class="form-control-home" rows="4" placeholder="Nasıl yardımcı olabiliriz?" required></textarea>
+                            <label for="ContactMessage" class="form-label text-muted-custom small fw-medium">Mesajın</label>
+                            <textarea class="form-control-home" id="ContactMessage" name="ContactMessage" rows="4" placeholder="Nasıl yardımcı olabiliriz?" required></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary-custom w-100 justify-content-center">
                             Mesajı Gönder <i class="bi bi-send-fill"></i>
@@ -474,6 +475,5 @@
         revealElements.forEach(el => observer.observe(el));
     </script>
 </body>
-</html>
 </html>
 

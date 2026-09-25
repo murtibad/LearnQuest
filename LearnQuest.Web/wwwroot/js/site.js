@@ -1,25 +1,8 @@
-/* ============================================
+﻿/* ============================================
    LearnQuest — Global JavaScript
    Theme, Animations, Skeleton & Utilities
    ============================================ */
 
-// --- PHASE 1: IMMEDIATE (Prevent FOUC) ---
-(function () {
-    const getPreferredTheme = () => {
-        const saved = localStorage.getItem('theme');
-        if (saved) return saved;
-
-        if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) return 'dark';
-        if (window.matchMedia?.('(prefers-color-scheme: light)').matches) return 'light';
-
-        const hour = new Date().getHours();
-        return (hour >= 19 || hour < 7) ? 'dark' : 'light';
-    };
-
-    document.documentElement.setAttribute('data-theme', getPreferredTheme());
-})();
-
-// --- PHASE 2: DOM LOADED ---
 document.addEventListener('DOMContentLoaded', () => {
 
     // 1. Theme Toggle
@@ -122,5 +105,4 @@ document.addEventListener('DOMContentLoaded', () => {
             item.classList.add('active');
         }
     });
-});
 });

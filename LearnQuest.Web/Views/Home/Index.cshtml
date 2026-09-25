@@ -79,6 +79,32 @@
         .hero-blob-2 { width: 400px; height: 400px; background: #06b6d4; bottom: -100px; left: -100px; }
         .hero-blob-3 { width: 300px; height: 300px; background: #8b5cf6; top: 50%; left: 40%; }
         
+        #heroCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        /* Custom cursor glow on hero */
+        #heroGlow {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(79, 70, 229, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            mix-blend-mode: screen;
+        }
+        
         @@keyframes fadeInUpHero {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -238,7 +264,9 @@
 
     <!-- ===== HERO ===== -->
     <section id="home" class="hero-section">
-        <!-- Ambient blobs -->
+        <!-- Ambient blobs & Particles -->
+        <canvas id="heroCanvas"></canvas>
+        <div id="heroGlow" class="d-none d-lg-block"></div>
         <div class="hero-blob hero-blob-1"></div>
         <div class="hero-blob hero-blob-2"></div>
         <div class="hero-blob hero-blob-3"></div>
@@ -473,6 +501,105 @@
         }, { threshold: 0.15 });
 
         revealElements.forEach(el => observer.observe(el));
+        
+        // Hero visual richness (canvas particles + glow)
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReducedMotion) {
+            const canvas = document.getElementById('heroCanvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let isVisible = true;
+            let animationFrameId;
+            let mouseX = window.innerWidth / 2;
+            let mouseY = window.innerHeight / 2;
+
+            const resizeCanvas = () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            };
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            for(let i = 0; i < 40; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5,
+                    alpha: Math.random() * 0.5 + 0.1
+                });
+            }
+
+            const draw = () => {
+                if (!isVisible) return;
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    // Parallax based on mouse
+                    const dx = (mouseX - canvas.width / 2) * 0.0005;
+                    const dy = (mouseY - canvas.height / 2) * 0.0005;
+                    p.x -= dx;
+                    p.y -= dy;
+
+                    if (p.x < 0) p.x = canvas.width;
+                    if (p.x > canvas.width) p.x = 0;
+                    if (p.y < 0) p.y = canvas.height;
+                    if (p.y > canvas.height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(79, 70, 229, ${p.alpha})`;
+                    ctx.fill();
+                });
+
+                animationFrameId = requestAnimationFrame(draw);
+            };
+            draw();
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    isVisible = false;
+                    cancelAnimationFrame(animationFrameId);
+                } else {
+                    isVisible = true;
+                    draw();
+                }
+            });
+
+            // Pointer glow effect
+            if (window.matchMedia('(pointer: fine)').matches) {
+                const glow = document.getElementById('heroGlow');
+                let glowX = window.innerWidth / 2;
+                let glowY = window.innerHeight / 2;
+                let targetX = glowX;
+                let targetY = glowY;
+                
+                document.addEventListener('mousemove', (e) => {
+                    targetX = e.clientX;
+                    targetY = e.clientY;
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                    
+                    if (glow.style.opacity === "0" || glow.style.opacity === "") {
+                        glow.style.opacity = "1";
+                    }
+                });
+
+                const updateGlow = () => {
+                    if (isVisible) {
+                        glowX += (targetX - glowX) * 0.1;
+                        glowY += (targetY - glowY) * 0.1;
+                        glow.style.transform = `translate(calc(${glowX}px - 50%), calc(${glowY}px - 50%))`;
+                    }
+                    requestAnimationFrame(updateGlow);
+                };
+                updateGlow();
+            }
+        }
     </script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </body>

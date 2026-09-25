@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    LearnQuest — Global JavaScript
    Theme, Animations, Skeleton & Utilities
    ============================================ */
@@ -105,4 +105,23 @@ document.addEventListener('DOMContentLoaded', () => {
             item.classList.add('active');
         }
     });
+
+    // 8. Sidebar Toggle
+    const sidebar = document.getElementById('mainSidebar');
+    const mainContent = document.getElementById('mainContent');
+    const sidebarToggleBtn = document.getElementById('sidebarToggle');
+    
+    if (sidebar && mainContent && sidebarToggleBtn) {
+        // Init state from local storage
+        if (localStorage.getItem('sidebar-collapsed') === 'true') {
+            sidebar.classList.add('collapsed');
+            mainContent.classList.add('expanded');
+        }
+        
+        sidebarToggleBtn.addEventListener('click', () => {
+            const isCollapsed = sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+            localStorage.setItem('sidebar-collapsed', isCollapsed);
+        });
+    }
 });

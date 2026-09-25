@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewData["Title"] = "Quiz";
     Layout = "_Layout";
 }
@@ -69,8 +69,8 @@
                     <div class="d-flex justify-content-between align-items-center mb-5">
                         <div class="d-flex align-items-center gap-3">
                             <div style="background-color: rgba(99, 102, 241, 0.2);" class="p-2 rounded-3 text-white border border-secondary">
-                                <span class="fw-bold"><!-- @Model.UserLevel -->Seviye 5</span>
-                                <small class="ms-2 opacity-75"><!-- @Model.UserXP -->320 / 600 XP</small>
+                                <span class="fw-bold">@* Model.UserLevel *@Seviye 5</span>
+                                <small class="ms-2 opacity-75">@* Model.UserXP *@320 / 600 XP</small>
                             </div>
                         </div>
                         <div class="d-flex align-items-center gap-4">
@@ -90,9 +90,9 @@
 
                     <!-- Question Area -->
                     <div class="text-center mb-5">
-                        <span class="text-muted text-uppercase fw-bold small" style="letter-spacing: 1px;"><!-- @Model.CurrentQuestion / @Model.TotalQuestions -->Soru 2/10</span>
+                        <span class="text-muted text-uppercase fw-bold small" style="letter-spacing: 1px;">@* Model.CurrentQuestion / Model.TotalQuestions *@Soru 2/10</span>
                         <h3 class="mt-3 fw-bold lh-base">
-                            <!-- @Model.QuestionText -->
+                            @* Model.QuestionText *@
                             Aşağıdakilerden hangisi .NET MVC mimarisinin ana bileşenlerinden biridir?
                         </h3>
                     </div>
@@ -103,28 +103,28 @@
                             <label class="quiz-option correct d-flex align-items-center gap-3 w-100">
                                 <input type="radio" name="SelectedAnswer" value="A" class="d-none" checked>
                                 <span class="fs-5 fw-bold opacity-75">A)</span>
-                                <span class="fs-5"><!-- @Model.Options[0] -->Controller</span>
+                                <span class="fs-5">@* Model.Options[0] *@Controller</span>
                             </label>
                         </div>
                         <div class="col-md-6">
                             <label class="quiz-option d-flex align-items-center gap-3 w-100">
                                 <input type="radio" name="SelectedAnswer" value="B" class="d-none">
                                 <span class="fs-5 fw-bold opacity-75">B)</span>
-                                <span class="fs-5"><!-- @Model.Options[1] -->ViewModel</span>
+                                <span class="fs-5">@* Model.Options[1] *@ViewModel</span>
                             </label>
                         </div>
                         <div class="col-md-6">
                             <label class="quiz-option d-flex align-items-center gap-3 w-100">
                                 <input type="radio" name="SelectedAnswer" value="C" class="d-none">
                                 <span class="fs-5 fw-bold opacity-75">C)</span>
-                                <span class="fs-5"><!-- @Model.Options[2] -->Repository</span>
+                                <span class="fs-5">@* Model.Options[2] *@Repository</span>
                             </label>
                         </div>
                         <div class="col-md-6">
                             <label class="quiz-option d-flex align-items-center gap-3 w-100">
                                 <input type="radio" name="SelectedAnswer" value="D" class="d-none">
                                 <span class="fs-5 fw-bold opacity-75">D)</span>
-                                <span class="fs-5"><!-- @Model.Options[3] -->DbContext</span>
+                                <span class="fs-5">@* Model.Options[3] *@DbContext</span>
                             </label>
                         </div>
                     </div>

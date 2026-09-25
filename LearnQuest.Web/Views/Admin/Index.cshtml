@@ -257,12 +257,14 @@
             <div class="table-bento skeleton-item p-4" style="max-width: 600px;">
                 <div class="mb-4">
                     <label class="form-label fw-bold">Platform Adı</label>
-                    <input type="text" name="PlatformName" id="PlatformName" class="form-control form-control-modal" value="LearnQuest">
+                    
+                                <span asp-validation-for="PlatformName" class="text-danger small mt-1 d-block"></span>
                 </div>
                 <div class="mb-4">
                     <label class="form-label fw-bold">Bakım Modu</label>
                     <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" name="MaintenanceMode" id="maintenanceMode">
+                        
+                                <span asp-validation-for="MaintenanceMode" class="text-danger small mt-1 d-block"></span>
                         <label class="form-check-label text-muted-custom" for="maintenanceMode">Sistemi bakıma al</label>
                     </div>
                 </div>
@@ -285,25 +287,18 @@
                     <div class="modal-body p-4">
                         <div class="mb-3">
                             <label class="form-label text-muted-custom small fw-medium">Ders Başlığı</label>
-                            <input type="text" id="courseTitleInput" name="CourseTitle" class="form-control form-control-modal" placeholder="Örn: Python ile Yapay Zeka" required />
+                            
+                                <span asp-validation-for="CourseTitle" class="text-danger small mt-1 d-block"></span>
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-muted-custom small fw-medium">Kategori</label>
-                            <select id="courseCategorySelect" name="CourseCategory" class="form-select form-select-modal" required>
-                                <option value="Programlama">Programlama</option>
-                                <option value="Veritabanı">Veritabanı</option>
-                                <option value="Web Geliştirme">Web Geliştirme</option>
-                                <option value="Yapay Zeka">Yapay Zeka</option>
-                            </select>
+                            
+                                <span asp-validation-for="CourseCategory" class="text-danger small mt-1 d-block"></span>
                         </div>
                         <div class="mb-3">
                             <label class="form-label text-muted-custom small fw-medium">İkon Türü</label>
-                            <select id="courseIconSelect" name="CourseIcon" class="form-select form-select-modal">
-                                <option value="bi-code-slash">Kod (Code)</option>
-                                <option value="bi-database">Veritabanı (Database)</option>
-                                <option value="bi-cpu">İşlemci / AI (CPU)</option>
-                                <option value="bi-globe">Web (Globe)</option>
-                            </select>
+                            
+                                <span asp-validation-for="CourseIcon" class="text-danger small mt-1 d-block"></span>
                         </div>
                     </div>
                     <div class="modal-footer modal-footer-custom">

@@ -217,6 +217,37 @@
             const addCourseModalEl = document.getElementById('addCourseModal');
             const modalInstance = new bootstrap.Modal(addCourseModalEl);
 
+            
+            // Tab Switching Logic
+            const navLinks = document.querySelectorAll(".admin-nav-link[data-target]");
+            const panels = document.querySelectorAll(".admin-panel");
+            
+            navLinks.forEach(link => {
+                link.addEventListener("click", (e) => {
+                    e.preventDefault();
+                    // Remove active from all links
+                    navLinks.forEach(l => l.classList.remove("active"));
+                    // Hide all panels
+                    panels.forEach(p => p.classList.add("d-none"));
+                    
+                    // Add active to clicked link
+                    link.classList.add("active");
+                    // Show target panel
+                    const targetId = link.getAttribute("data-target");
+                    const targetPanel = document.getElementById(targetId);
+                    if (targetPanel) {
+                        targetPanel.classList.remove("d-none");
+                        targetPanel.style.opacity = "0";
+                        targetPanel.style.transform = "translateY(10px)";
+                        setTimeout(() => {
+                            targetPanel.style.transition = "all 0.3s ease";
+                            targetPanel.style.opacity = "1";
+                            targetPanel.style.transform = "translateY(0)";
+                        }, 10);
+                    }
+                });
+            });
+
             // Handle Add Course Form Submission
             addCourseForm.addEventListener('submit', (e) => {
                 e.preventDefault();

@@ -1,4 +1,4 @@
-@{ Layout = null; }
+﻿@{ Layout = null; }
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -34,7 +34,7 @@
         </div>
         <form action="/Auth/Login" method="post">
             @Html.AntiForgeryToken()
-            <!-- @Html.ValidationSummary() -->
+            @* Html.ValidationSummary() *@
             <div class="mb-3">
                 <label class="form-label fw-medium text-muted-custom small" for="Email">E-posta</label>
                 <input type="email" class="form-control" id="Email" name="Email" placeholder="ogrenci@subu.edu.tr" required>

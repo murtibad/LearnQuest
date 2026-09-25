@@ -1,8 +1,9 @@
 /* ============================================
-   LearnQuest - Global Design System
+   LearnQuest — Global Design System
+   Modern & Gamification-Ready CSS
    ============================================ */
 
-/* Default Light Mode Variables */
+/* --- Light Theme Variables --- */
 :root {
     --bg-main: #f4f7fe;
     --text-main: #0f172a;
@@ -20,9 +21,12 @@
     --warning: #f59e0b;
     --danger: #ef4444;
     --info: #3b82f6;
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark Mode Variables */
+/* --- Dark Theme Variables --- */
 [data-theme="dark"] {
     --bg-main: #0b1120;
     --text-main: #f8fafc;
@@ -36,12 +40,14 @@
     --purple-badge: #a78bfa;
     --primary: #6366f1;
     --primary-hover: #818cf8;
+    --shadow-sm: 0 4px 15px rgba(0, 0, 0, 0.15);
+    --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.25);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.35);
 }
 
 /* ============================================
    Global Base Styles
    ============================================ */
-
 body {
     background-color: var(--bg-main) !important;
     color: var(--text-main) !important;
@@ -56,38 +62,54 @@ a {
 /* ============================================
    Utility Classes
    ============================================ */
-
 .text-muted-custom {
     color: var(--text-muted) !important;
     transition: color 0.3s ease;
 }
 
 /* ============================================
+   Logo Component
+   ============================================ */
+.logo-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #4F46E5, #06b6d4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    color: white;
+    flex-shrink: 0;
+}
+
+.logo-icon-lg {
+    width: 42px;
+    height: 42px;
+    font-size: 1.3rem;
+    border-radius: 12px;
+}
+
+/* ============================================
    Bento Card Component
    ============================================ */
-
 .bento-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 20px;
     padding: 24px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-sm);
 }
 
 .bento-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
-}
-
-[data-theme="dark"] .bento-card:hover {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    box-shadow: var(--shadow-md);
 }
 
 /* ============================================
    Form Controls (Theme-Aware)
    ============================================ */
-
 .form-control,
 .form-select {
     background-color: var(--input-bg) !important;
@@ -115,11 +137,11 @@ a {
 }
 
 /* ============================================
-   Scrollbar Styling
+   Custom Scrollbar
    ============================================ */
-
 ::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -132,13 +154,12 @@ a {
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted);
+    background: var(--primary);
 }
 
 /* ============================================
-   Progress Bar Theme Support
+   Progress Bar
    ============================================ */
-
 .progress {
     background-color: var(--border-color) !important;
 }
@@ -146,15 +167,13 @@ a {
 /* ============================================
    Table Theme Support
    ============================================ */
-
 .table {
     color: var(--text-main) !important;
 }
 
 /* ============================================
-   Badge Variants
+   Badge Category Variant
    ============================================ */
-
 .badge-category {
     padding: 6px 14px;
     border-radius: 20px;
@@ -165,14 +184,13 @@ a {
 /* ============================================
    Activity Item Component
    ============================================ */
-
 .activity-item {
     display: flex;
     align-items: center;
     gap: 16px;
     padding: 16px 0;
     border-bottom: 1px solid var(--border-color);
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease;
 }
 
 .activity-item:last-child {
@@ -191,21 +209,24 @@ a {
 }
 
 /* ============================================
-   Badge/Rozet Component
+   Badge / Rozet Component
    ============================================ */
-
 .badge-card {
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 20px;
     text-align: center;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .badge-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-md);
+}
+
+.badge-card:hover .badge-icon {
+    animation: badgeGlow 0.6s ease forwards;
 }
 
 .badge-icon {
@@ -217,12 +238,12 @@ a {
     justify-content: center;
     margin: 0 auto 12px auto;
     font-size: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ============================================
-   Stat Bar (for Profile/Statistics)
+   Stat Bar (Profile / Statistics Charts)
    ============================================ */
-
 .stat-bar {
     background-color: var(--border-color);
     border-radius: 6px;
@@ -243,7 +264,6 @@ a {
 /* ============================================
    Tab Component
    ============================================ */
-
 .tab-custom {
     display: inline-block;
     padding: 10px 24px;
@@ -269,27 +289,16 @@ a {
 }
 
 /* ============================================
-   Responsive Utilities
+   User Profile Button
    ============================================ */
-
-@media (max-width: 768px) {
-    .sidebar {
-        display: none;
-    }
-
-    .main-content {
-        margin-left: 0 !important;
-    }
+.user-profile-btn:hover {
+    background-color: var(--hover-bg) !important;
+    transform: translateY(-2px);
 }
 
-
-/* ===== GLOBAL LOGO ===== */
-.logo-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, #4F46E5, #06b6d4); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: white; }
-.logo-icon-lg { width: 42px; height: 42px; font-size: 1.3rem; border-radius: 12px; }
-
-.user-profile-btn:hover { background-color: var(--hover-bg) !important; transform: translateY(-2px); }
-
-/* Notification Dropdown Customizations */
+/* ============================================
+   Notification Dropdown
+   ============================================ */
 .notification-dropdown {
     background-color: var(--card-bg) !important;
     border-color: var(--border-color) !important;
@@ -297,32 +306,309 @@ a {
     border-radius: 16px;
     padding: 0;
     overflow: hidden;
-    
 }
+
 .notification-dropdown .dropdown-item {
     transition: background-color 0.2s ease;
     white-space: normal;
 }
+
 .notification-dropdown .dropdown-item:hover {
     background-color: var(--hover-bg) !important;
 }
-@keyframes fadeInDropdown {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
+
+.notification-dropdown.show {
+    animation: fadeInDropdown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
+/* ============================================
+   Skeleton Loading
+   ============================================ */
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    background: var(--card-bg) !important;
+    color: transparent !important;
+    border-color: transparent !important;
+    user-select: none;
+    pointer-events: none;
+}
 
+.skeleton * {
+    visibility: hidden !important;
+}
 
-.notification-dropdown.show { animation: fadeInDropdown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.skeleton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    right: 0;
+    bottom: 0;
+    width: 200%;
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%);
+    animation: shimmer 1.5s infinite;
+    z-index: 10;
+}
 
-/* ===== CUSTOM SCROLLBAR ===== */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-track { background: var(--bg-main); }
-::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
-::-webkit-scrollbar-thumb:hover { background: #4F46E5; }
+/* ============================================
+   Animations
+   ============================================ */
 
-/* ===== SKELETON LOADING ===== */
-.skeleton { position: relative; overflow: hidden; background: var(--card-bg) !important; color: transparent !important; border-color: transparent !important; user-select: none; pointer-events: none; }
-.skeleton * { visibility: hidden !important; }
-.skeleton::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%); animation: shimmer 1.5s infinite; z-index: 10; }
-@keyframes shimmer { 100% { transform: translateX(100%); } }
+/* Fade-in for page content */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+}
+
+.fade-in-up-delay-1 { animation-delay: 0.1s; }
+.fade-in-up-delay-2 { animation-delay: 0.2s; }
+.fade-in-up-delay-3 { animation-delay: 0.3s; }
+.fade-in-up-delay-4 { animation-delay: 0.4s; }
+
+/* Shimmer for skeleton loading */
+@keyframes shimmer {
+    100% {
+        transform: translateX(50%);
+    }
+}
+
+/* Dropdown entrance */
+@keyframes fadeInDropdown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Badge glow on hover */
+@keyframes badgeGlow {
+    0% {
+        transform: scale(1);
+        box-shadow: none;
+    }
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+    }
+    100% {
+        transform: scale(1.05);
+        box-shadow: 0 0 10px rgba(79, 70, 229, 0.2);
+    }
+}
+
+/* XP gain pulse */
+@keyframes xpPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.xp-pulse {
+    animation: xpPulse 0.5s ease;
+}
+
+/* Button ripple effect */
+.btn-ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.btn-ripple:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Progress bar animated fill */
+.progress-bar-animated {
+    transition: width 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================
+   Mobile Navigation (Hamburger Menu)
+   ============================================ */
+.mobile-nav-toggle {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1050;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4F46E5, #6366f1);
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.mobile-nav-toggle:active {
+    transform: scale(0.9);
+}
+
+/* Mobile bottom navigation */
+.mobile-bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1040;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 8px 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.mobile-bottom-nav .mobile-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 6px 0;
+    transition: color 0.2s ease;
+}
+
+.mobile-bottom-nav .mobile-nav-item.active,
+.mobile-bottom-nav .mobile-nav-item:hover {
+    color: var(--primary);
+}
+
+.mobile-bottom-nav .mobile-nav-item i {
+    font-size: 1.25rem;
+}
+
+/* ============================================
+   Scroll-to-Top Button
+   ============================================ */
+.scroll-to-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1030;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.scroll-to-top:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   Responsive Breakpoints
+   ============================================ */
+
+/* Tablet */
+@media (max-width: 992px) {
+    .sidebar {
+        width: 220px;
+        padding: 16px;
+    }
+
+    .main-content {
+        margin-left: 220px !important;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main-content {
+        margin-left: 0 !important;
+        padding-bottom: 80px !important;
+    }
+
+    .mobile-bottom-nav {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .bento-card {
+        border-radius: 16px;
+        padding: 16px;
+    }
+
+    .container-fluid {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .scroll-to-top {
+        bottom: 80px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .badge-card {
+        padding: 14px;
+    }
+
+    .badge-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+}

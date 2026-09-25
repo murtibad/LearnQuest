@@ -1,6 +1,6 @@
 @{ Layout = null; }
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <script src="~/js/site.js"></script>
     <meta charset="utf-8" />
@@ -32,18 +32,23 @@
             <h4 class="fw-bold">Maceraya Katıl!</h4>
             <p class="text-muted-custom">Kendi öğrenme yolculuğunu başlat.</p>
         </div>
-        <form action="/Dashboard" method="get">
+        <form action="/Auth/Register" method="post">
+            @Html.AntiForgeryToken()
             <div class="mb-3">
-                <label class="form-label fw-medium text-muted-custom small">Ad Soyad</label>
-                <input type="text" class="form-control" placeholder="Örn: Tayfun Soy" required>
+                <label class="form-label fw-medium text-muted-custom small" for="FullName">Ad Soyad</label>
+                <input type="text" class="form-control" id="FullName" name="FullName" placeholder="Örn: Tayfun Soy" required>
             </div>
             <div class="mb-3">
-                <label class="form-label fw-medium text-muted-custom small">E-posta</label>
-                <input type="email" class="form-control" placeholder="ogrenci@subu.edu.tr" required>
+                <label class="form-label fw-medium text-muted-custom small" for="Email">E-posta</label>
+                <input type="email" class="form-control" id="Email" name="Email" placeholder="ogrenci@subu.edu.tr" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label fw-medium text-muted-custom small" for="Password">Şifre</label>
+                <input type="password" class="form-control" id="Password" name="Password" placeholder="••••••••" required minlength="6">
             </div>
             <div class="mb-4">
-                <label class="form-label fw-medium text-muted-custom small">Şifre</label>
-                <input type="password" class="form-control" placeholder="••••••••" required>
+                <label class="form-label fw-medium text-muted-custom small" for="ConfirmPassword">Şifre Tekrar</label>
+                <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" placeholder="••••••••" required minlength="6">
             </div>
             <button type="submit" class="btn-primary-custom mb-3">Kayıt Ol</button>
             <p class="text-center text-muted-custom small mb-0">
@@ -53,7 +58,3 @@
     </div>
 </body>
 </html>
-
-
-
-

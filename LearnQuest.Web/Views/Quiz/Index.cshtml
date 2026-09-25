@@ -1,9 +1,9 @@
-﻿@{
+@{
     ViewData["Title"] = "Quiz";
+    Layout = "_Layout";
 }
 
 <style>
-    /* Quiz specific styles matching the mockup */
     .quiz-container {
         background: linear-gradient(135deg, #0b1120 0%, #1e293b 100%);
         border-radius: 24px;
@@ -12,6 +12,7 @@
         position: relative;
         overflow: hidden;
     }
+
     .quiz-option {
         background-color: rgba(255, 255, 255, 0.05);
         border: 2px solid rgba(255, 255, 255, 0.1);
@@ -22,93 +23,155 @@
         transition: all 0.2s ease;
         cursor: pointer;
     }
+
     .quiz-option:hover {
         background-color: rgba(255, 255, 255, 0.1);
-        border-color: var(--primary-blue);
+        border-color: var(--primary);
     }
+
     .quiz-option.selected {
         background-color: rgba(79, 70, 229, 0.2);
-        border-color: var(--primary-blue);
+        border-color: var(--primary);
     }
+
     .quiz-option.correct {
         background-color: rgba(16, 185, 129, 0.2);
-        border-color: var(--success-green);
+        border-color: var(--success);
+    }
+
+    .quiz-option.wrong {
+        background-color: rgba(239, 68, 68, 0.2);
+        border-color: var(--danger);
+    }
+
+    .quiz-timer {
+        animation: timerPulse 1s ease-in-out infinite;
+    }
+
+    @@keyframes timerPulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
     }
 </style>
 
 <div class="container-fluid py-4">
     <div class="row justify-content-center">
         <div class="col-md-10 col-lg-8">
-            
-            <!-- Main Quiz Card -->
-            <div class="quiz-container shadow-lg">
-                <!-- Header: Health and Timer -->
-                <div class="d-flex justify-content-between align-items-center mb-5">
-                    <div class="d-flex align-items-center gap-3">
-                        <div style="background-color: rgba(99, 102, 241, 0.2);" class="p-2 rounded-3 text-white border border-secondary">
-                            <span class="fw-bold">Seviye 5</span>
-                            <small class="ms-2 opacity-75">320 / 600 XP</small>
+
+            <!-- Partial: _QuizContainer -->
+            <form id="quizForm" action="/Quiz/Submit" method="post">
+                @Html.AntiForgeryToken()
+                <input type="hidden" id="QuizId" name="QuizId" value="1" />
+                <input type="hidden" id="QuestionId" name="QuestionId" value="2" />
+
+                <div class="quiz-container shadow-lg">
+                    <!-- Header: Level, Health & Timer -->
+                    <div class="d-flex justify-content-between align-items-center mb-5">
+                        <div class="d-flex align-items-center gap-3">
+                            <div style="background-color: rgba(99, 102, 241, 0.2);" class="p-2 rounded-3 text-white border border-secondary">
+                                <span class="fw-bold"><!-- @Model.UserLevel -->Seviye 5</span>
+                                <small class="ms-2 opacity-75"><!-- @Model.UserXP -->320 / 600 XP</small>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-4">
+                            <!-- Health Points -->
+                            <div class="text-danger fs-4" aria-label="Kalan can: 3">
+                                <i class="bi bi-heart-fill"></i>
+                                <i class="bi bi-heart-fill"></i>
+                                <i class="bi bi-heart-fill"></i>
+                                <i class="bi bi-heart"></i>
+                            </div>
+                            <!-- Timer -->
+                            <div class="bg-primary bg-opacity-25 px-3 py-1 rounded-pill border border-primary fs-5 fw-bold quiz-timer" id="quizTimer">
+                                <i class="bi bi-clock me-2"></i><span id="timerDisplay">00:45</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="d-flex align-items-center gap-4">
-                        <div class="text-danger fs-4">
-                            <i class="bi bi-heart-fill"></i>
-                            <i class="bi bi-heart-fill"></i>
-                            <i class="bi bi-heart-fill"></i>
-                            <i class="bi bi-heart"></i>
+
+                    <!-- Question Area -->
+                    <div class="text-center mb-5">
+                        <span class="text-muted text-uppercase fw-bold small" style="letter-spacing: 1px;"><!-- @Model.CurrentQuestion / @Model.TotalQuestions -->Soru 2/10</span>
+                        <h3 class="mt-3 fw-bold lh-base">
+                            <!-- @Model.QuestionText -->
+                            Aşağıdakilerden hangisi .NET MVC mimarisinin ana bileşenlerinden biridir?
+                        </h3>
+                    </div>
+
+                    <!-- Options Grid -->
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6">
+                            <label class="quiz-option correct d-flex align-items-center gap-3 w-100">
+                                <input type="radio" name="SelectedAnswer" value="A" class="d-none" checked>
+                                <span class="fs-5 fw-bold opacity-75">A)</span>
+                                <span class="fs-5"><!-- @Model.Options[0] -->Controller</span>
+                            </label>
                         </div>
-                        <div class="bg-primary bg-opacity-25 px-3 py-1 rounded-pill border border-primary fs-5 fw-bold">
-                            <i class="bi bi-clock me-2"></i>00:45
+                        <div class="col-md-6">
+                            <label class="quiz-option d-flex align-items-center gap-3 w-100">
+                                <input type="radio" name="SelectedAnswer" value="B" class="d-none">
+                                <span class="fs-5 fw-bold opacity-75">B)</span>
+                                <span class="fs-5"><!-- @Model.Options[1] -->ViewModel</span>
+                            </label>
                         </div>
+                        <div class="col-md-6">
+                            <label class="quiz-option d-flex align-items-center gap-3 w-100">
+                                <input type="radio" name="SelectedAnswer" value="C" class="d-none">
+                                <span class="fs-5 fw-bold opacity-75">C)</span>
+                                <span class="fs-5"><!-- @Model.Options[2] -->Repository</span>
+                            </label>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="quiz-option d-flex align-items-center gap-3 w-100">
+                                <input type="radio" name="SelectedAnswer" value="D" class="d-none">
+                                <span class="fs-5 fw-bold opacity-75">D)</span>
+                                <span class="fs-5"><!-- @Model.Options[3] -->DbContext</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Success Alert -->
+                    <div class="alert bg-success bg-opacity-10 border border-success text-white d-flex justify-content-between align-items-center mb-0" role="alert">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="bi bi-check-circle-fill text-success fs-4"></i>
+                            <span class="fw-bold fs-5">Doğru cevap! 🎉</span>
+                        </div>
+                        <span class="fw-bold fs-5 text-success">+50 XP</span>
                     </div>
                 </div>
 
-                <!-- Question Area -->
-                <div class="text-center mb-5">
-                    <span class="text-muted text-uppercase fw-bold letter-spacing-1">Soru 2/10</span>
-                    <h3 class="mt-3 fw-bold lh-base">
-                        Aşağıdakilerden hangisi .NET MVC mimarisinin ana bileşenlerinden biridir?
-                    </h3>
+                <!-- Navigation Buttons -->
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-outline-secondary rounded-pill px-4" disabled>← Önceki</button>
+                    <button type="submit" class="btn text-white rounded-pill px-4 fw-semibold" style="background-color: var(--primary);">Sonraki Soru →</button>
                 </div>
-
-                <!-- Options Grid -->
-                <div class="row g-4 mb-5">
-                    <div class="col-md-6">
-                        <div class="quiz-option correct d-flex align-items-center gap-3">
-                            <span class="fs-5 fw-bold opacity-75">A)</span>
-                            <span class="fs-5">Controller</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="quiz-option d-flex align-items-center gap-3">
-                            <span class="fs-5 fw-bold opacity-75">B)</span>
-                            <span class="fs-5">ViewModel</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="quiz-option d-flex align-items-center gap-3">
-                            <span class="fs-5 fw-bold opacity-75">C)</span>
-                            <span class="fs-5">Repository</span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="quiz-option d-flex align-items-center gap-3">
-                            <span class="fs-5 fw-bold opacity-75">D)</span>
-                            <span class="fs-5">DbContext</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Success Alert (Mocking correct answer state) -->
-                <div class="alert bg-success bg-opacity-10 border border-success text-white d-flex justify-content-between align-items-center mb-0">
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="bi bi-check-circle-fill text-success fs-4"></i>
-                        <span class="fw-bold fs-5">Doğru cevap! 🎉</span>
-                    </div>
-                    <span class="fw-bold fs-5 text-success">+50 XP</span>
-                </div>
-
-            </div>
+            </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Quiz option selection
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+                    option.classList.add('selected');
+                    const radio = option.querySelector('input[type="radio"]');
+                    if (radio) radio.checked = true;
+                });
+            });
+
+            // Timer countdown
+            let timeLeft = 45;
+            const timerDisplay = document.getElementById('timerDisplay');
+            const countdown = setInterval(() => {
+                timeLeft--;
+                const mins = Math.floor(timeLeft / 60).toString().padStart(2, '0');
+                const secs = (timeLeft % 60).toString().padStart(2, '0');
+                if (timerDisplay) timerDisplay.textContent = `${mins}:${secs}`;
+                if (timeLeft <= 0) clearInterval(countdown);
+            }, 1000);
+        });
+    </script>
+}

@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    LearnQuest - Global Design System
    ============================================ */
 
@@ -322,7 +322,7 @@ a {
 ::-webkit-scrollbar-thumb:hover { background: #4F46E5; }
 
 /* ===== SKELETON LOADING ===== */
-.skeleton { position: relative; overflow: hidden; background-color: var(--card-bg) !important; color: transparent !important; border-color: transparent !important; user-select: none; pointer-events: none; }
+.skeleton { position: relative; overflow: hidden; background: var(--card-bg) !important; color: transparent !important; border-color: transparent !important; user-select: none; pointer-events: none; }
 .skeleton * { visibility: hidden !important; }
 .skeleton::after { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(90deg, rgba(255,255,255,0) 0, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0) 100%); animation: shimmer 1.5s infinite; z-index: 10; }
 @keyframes shimmer { 100% { transform: translateX(100%); } }
